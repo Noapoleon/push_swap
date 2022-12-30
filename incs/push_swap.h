@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/30 22:55:18 by nlegrand          #+#    #+#             */
-/*   Updated: 2022/12/30 22:57:37 by nlegrand         ###   ########.fr       */
+/*   Created: 2022/12/30 22:57:11 by nlegrand          #+#    #+#             */
+/*   Updated: 2022/12/30 23:02:09 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
-// Unimportant function
-int	main(int ac, char **av)
-{
-	(void)ac;
-	(void)av;
+# include "libft.h"
+# include <unistd.h>
+# include <stdlib.h>
 
-	ft_printf("hello world\n");
-	return (0);
-}
+#endif
