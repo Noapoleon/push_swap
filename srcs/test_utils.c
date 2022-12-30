@@ -6,12 +6,11 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 23:12:28 by nlegrand          #+#    #+#             */
-/*   Updated: 2022/12/30 23:34:23 by nlegrand         ###   ########.fr       */
+/*   Updated: 2022/12/30 23:50:08 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 void	show_parsed_list(int *a, int ac)
 {
