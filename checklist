@@ -1,2 +1,16 @@
+INTERROGATIONS:
+	- what if the list is one element long ?
+
+TESTS:
+	- int/long max/min
+	- int/long max/min + 1
+	- int/long max/min -1
+	- empty string
+	- multiple negative signs
+	- positive signs
+	- multiple positive signs
+	- letters
+	-
+
 TO IMPLEMENT:
 	- ps_terminate : terminates push_swap program with exit mode (not sure it's necessary)
