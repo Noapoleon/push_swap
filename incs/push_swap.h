@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:57:11 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/02 07:39:59 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/02 09:20:10 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@
 # include <limits.h>
 #include <stdio.h> // REMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOVE LATER
 
+// DEBUUUUUUUUUUUUUUUUUUUUUUUUUUUUG ONLY, REMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOVE LATER
+// AND REPLACE ALL PRINTS TO "Error\n" on stderr
 # define PSE_MALLOC_STACKS	"[ERROR] Failed to malloc stacks\n"
-# define PSE_PARSE			"[ERROR] Failed to parse stack\n" // REMOOOOOOOOOOOVE LATER because i think i need to output "Error" only
+# define PSE_PARSE			"[ERROR] Failed to parse stack\n"
+# define PSE_FORMAT			"[ERROR] Wrong argument format, not int\n"
+# define PSE_DUPLICATE		"[ERROR] Duplicate arguments\n"
 
 typedef struct s_stack t_stack;
 struct s_stack
@@ -29,6 +33,7 @@ struct s_stack
 	t_stack	*next;
 };
 
+// PARSER
 int	parse_ints(int **a, int ac, char **av);
 int	parse_int(int *a, char *nptr);
 
