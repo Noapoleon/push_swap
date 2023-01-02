@@ -14,3 +14,7 @@ TESTS:
 
 TO IMPLEMENT:
 	- ps_terminate : terminates push_swap program with exit mode (not sure it's necessary)
+
+CONSIDER:
+	- If the size of the list is small enough it might be beneficial to use
+	  normal arrays instead so check if it's worth it to implement it aswell

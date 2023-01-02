@@ -19,6 +19,7 @@ DEBUG	=	-g3 -gdwarf-4
 # Files
 SRCS	:=	push_swap.c \
 			parser.c \
+			utils.c \
 			test_utils.c
 OBJS	:=	$(SRCS:.c=.o)
 SRCS	:=	$(addprefix $(SRCDIR)/, $(SRCS))

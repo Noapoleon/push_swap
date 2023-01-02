@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:57:11 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/02 09:20:10 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/02 11:19:18 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,31 @@
 # define PSE_DUPLICATE		"[ERROR] Duplicate arguments\n"
 
 typedef struct s_stack t_stack;
+typedef struct s_stack_list t_stack_list; // consider renaming
 struct s_stack
 {
-	int		data;
-	t_stack	*next;
+	t_stack_list	*top;
+	t_stack_list	*bot_prev;
+	t_stack_list	*bot;
+	int				size;
+};
+struct s_stack_list
+{
+	int				data;
+	t_stack_list	*next;
 };
 
 // PARSER
-int	parse_ints(int **a, int ac, char **av);
-int	parse_int(int *a, char *nptr);
+int		parse_ints(int **tmp, int ac, char **av);
+int		parse_int(int *n, char *nptr);
 
+// UTILS
+int		init_stacks(t_stack *a, t_stack *b, int *tmp, int size);
+void	zero_init_stack(t_stack *stack);
+void	terminate_ps(t_stack *a, t_stack *b);
 
 // TEST UTILS // REMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOVE LATER
-void	show_stacks(int *a, int *b, int ac);
+void	show_stacks(t_stack *a, t_stack *b);
+//void	show_stacks(int *a, int *b, int ac); // old
 
 #endif
