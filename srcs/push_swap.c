@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:55:18 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/01 20:31:44 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/02 08:23:38 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@ int	parse_ints(int	**a, int ac, char **av)
 {
 	int	i;
 
-	i = 1;
-	while (i < ac)
+	i = 0;
+	while (i < ac - 1)
 	{
-		if (parse_int(&(*a)[i - 1], av[i]) == -1)
+		if (parse_int(&(*a)[i], av[i + 1]) == -1)
 			return (-1);
+//		if ( 
 		++i;
 	}
 	return (0);
@@ -63,7 +64,7 @@ int	parse_int(int *n, char *nptr)
 	while ((*nptr >= '0') && (*nptr <= '9'))
 	{
 		nb = (nb * 10) + (*nptr++ - 48);
-		if (nb < INT_MIN && nb > INT_MAX)
+		if (nb > (long)INT_MAX + (sign == -1))
 			return (-1);
 	}
 	return ((*n = sign * (int)nb), 0);

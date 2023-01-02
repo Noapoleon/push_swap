@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:57:11 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/01 20:31:15 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/02 07:39:59 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 # include <unistd.h>
 # include <stdlib.h>
+# include <limits.h>
 #include <stdio.h> // REMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOVE LATER
 
 # define PSE_MALLOC_STACKS	"[ERROR] Failed to malloc stacks\n"
