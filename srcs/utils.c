@@ -6,7 +6,7 @@
 /*   By: nlegrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 10:35:31 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/03 10:50:17 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/04 18:40:40 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,9 @@ int	init_stacks(t_stack *a, t_stack *b, int *tmp, int size)
 		(*curr)->prev = prev;
 		prev = *curr;
 		(*curr)->data = tmp[i];
-		printf("data -> %d\n", (*curr)->data);
 		(*curr)->next = NULL;
 		curr = &((*curr)->next);
 		// check 'i' and compare to size to set 'bot' and 'bot_prev'
-		++a->size;
 		++i;
 	}
 	a->bot = prev; // not tested:wa
@@ -46,7 +44,6 @@ void	zero_init_stack(t_stack *stack)
 {
 	stack->top = NULL;
 	stack->bot = NULL;
-	stack->size = 0;
 }
 
 // Clears the contents of a stack but doesn't need to free the stack variable
@@ -66,7 +63,6 @@ void	clear_stack(t_stack *stack)
 	// rest
 	stack->top = NULL;
 	stack->bot = NULL;
-	stack->size = 0;
 }
 
 //void	terminate_ps(t_stack *a, t_stack *b, int **tmp)

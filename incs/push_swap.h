@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:57:11 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/03 10:33:59 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/04 18:47:49 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ struct s_stack
 {
 	t_stack_list	*top;
 	t_stack_list	*bot;
-	int				size;
 };
 struct s_stack_list
 {
@@ -52,6 +51,7 @@ void	clear_stack(t_stack *stack);
 //void	terminate_ps(t_stack *a, t_stack *b);
 
 // TEST UTILS // REMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOVE LATER
+void	show_stacks_status(t_stack *a, t_stack *b);
 void	show_stacks(t_stack *a, t_stack *b);
 //void	show_stacks(int *a, int *b, int ac); // old
 void	instruction_tests(t_stack *a, t_stack *b);
