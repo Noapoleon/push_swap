@@ -24,3 +24,4 @@ CONSIDER:
 	  these checks could potentially be avoided once the algorithm is perfect.
 	  Now the question is can I make the sorting algorithm without using BOTH
 	  the size of the array AND the null checks
+	- deference stack 'a' in a variable to make 'parse_ints()' faster?

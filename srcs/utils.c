@@ -12,6 +12,7 @@
 
 #include "push_swap.h"
 
+// Fills stacks with parsed int values from argv
 int	init_stacks(t_stack *a, t_stack *b, int *tmp, int size)
 {
 	t_stack_list	**curr;
@@ -35,31 +36,29 @@ int	init_stacks(t_stack *a, t_stack *b, int *tmp, int size)
 		curr = &((*curr)->next);
 		++a->size;
 	}
-	a->top->prev = prev; // this for circle
+	a->top->prev = prev;
 	prev->next = a->top;
-//	*curr = a->top; // added when removed double chaines
 	return (0);
 }
 
-void	zero_init_stack(t_stack *stack)
+// Sets stack attributes to 0
+void	zero_init_stack(t_stack *s)
 {
-	stack->top = NULL;
-//	stack->bot = NULL;
-	stack->size = 0;
+	s->top = NULL;
+	s->size = 0;
 }
 
 // Clears the contents of a stack but doesn't need to free the stack variable
 // itself  as in our situation it's not allocated
 void	clear_stack(t_stack *s)
 {
-	// NEEDS TO BE MODIFIED FOR CIRCLE STACK
 	t_stack_list	*curr;
 	t_stack_list	*tmp;
 	int				i;
 
 	curr = s->top;
 	i = 0;
-	while (i++ < s->size) // or == to top i think not sure that would always work
+	while (i++ < s->size)
 	{
 		tmp = curr;
 		curr = curr->next;
@@ -68,10 +67,3 @@ void	clear_stack(t_stack *s)
 	s->top = NULL;
 	s->size = 0;
 }
-
-//void	terminate_ps(t_stack *a, t_stack *b, int **tmp)
-//{
-//	clear_stack(a);
-//	clear_stack(b);
-//	free(tmp);
-//}

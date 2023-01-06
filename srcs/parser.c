@@ -12,7 +12,8 @@
 
 #include "push_swap.h"
 
-int	parse_ints(int	**a, int ac, char **av)
+// Parses all ints from argv and and returns error in case of bad formatting
+int	parse_ints(int	**tmp, int ac, char **av)
 {
 	int	i;
 	int	c;
@@ -20,17 +21,19 @@ int	parse_ints(int	**a, int ac, char **av)
 	i = 0;
 	while (i < ac - 1)
 	{
-		if (parse_int(&(*a)[i], av[i + 1]) == -1)
+		if (parse_int(&(*tmp)[i], av[i + 1]) == -1)
 			return (-1);
 		c = 0;
 		while (c < i)
-			if ((*a)[c++] == (*a)[i]) // consider dereferencing 'a' in a variable if program is slow
+			if ((*tmp)[c++] == (*tmp)[i]) // consider dereferencing 'a' in a variable if program is slow
 				return (-1);
 		++i;
 	}
 	return (0);
 }
 
+// Modified version of atoi that parses one int from argv and returns an error
+// if a formatting error is met
 int	parse_int(int *n, char *nptr)
 {
 	long	nb;
