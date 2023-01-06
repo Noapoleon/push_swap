@@ -91,15 +91,13 @@ void	push(t_stack *dst, t_stack *src)
 		dst->top = pushing;
 		dst->top->next = pushing;
 		dst->top->prev = pushing;
+		return ;
 	}
-	else
-	{
-		pushing->next = dst->top;
-		pushing->prev = dst->top->prev;
-		dst->top->prev->next = pushing;
-		dst->top->prev = pushing;
-		dst->top = pushing;
-	}
+	pushing->next = dst->top;
+	pushing->prev = dst->top->prev;
+	dst->top->prev->next = pushing;
+	dst->top->prev = pushing;
+	dst->top = pushing;
 }
 
 void	swap(t_stack *s)
@@ -145,6 +143,7 @@ void	instruction_tests(t_stack *a, t_stack *b)
 	rrot(a);
 	//rrot(a);
 	swap(a);
+	push(a, b);
 	show_stacks(a, b);
 	show_stacks_status(a, b);
 }

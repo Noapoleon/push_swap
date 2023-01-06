@@ -37,6 +37,7 @@ int	init_stacks(t_stack *a, t_stack *b, int *tmp, int size)
 	}
 	a->top->prev = prev; // this for circle
 	prev->next = a->top;
+//	*curr = a->top; // added when removed double chaines
 	return (0);
 }
 
