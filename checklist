@@ -18,3 +18,8 @@ TO IMPLEMENT:
 CONSIDER:
 	- If the size of the list is small enough it might be beneficial to use
 	  normal arrays instead so check if it's worth it to implement it aswell
+	- Right now push and swap functions have checks in them (null checks and
+	  stuff) in case of errors when making the algorithm, my thinking is that
+	  these checks could potentially be avoided once the algorithm is perfect.
+	  Now the question is can I make the sorting algorithm without using BOTH
+	  the size of the array AND the null checks

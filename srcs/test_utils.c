@@ -69,12 +69,13 @@ void	show_stacks(t_stack *a, t_stack *b)
 
 void	push(t_stack *dst, t_stack *src)
 {
+	// DIDN'T CHECK FOR PREV POINTER
 	// Dont forget to change top and bot pointers approprietly when size is
 	// is small, like 0, 1 or 2
 	t_stack_list *pushing;
 
 	if (src->top == NULL) // useless but keep for debugging with a print
-		return (void)(ft_printf("ya plus rien\n"));
+		return (void)(ft_printf("ya plus rien a push\n"));
 	pushing = src->top;
 	src->top = src->top->next;
 	if (src->top == NULL)
@@ -85,14 +86,40 @@ void	push(t_stack *dst, t_stack *src)
 		dst->bot = dst->top;
 }
 
+void	swap(t_stack *s)
+{
+	int	tmp;
+
+	if (s->top == NULL || s->top->next == NULL) // put for debug only, but this might be useful
+		return ;
+	tmp = s->top->data;
+	s->top->data = s->top->next->data;
+	s->top->next->data = tmp;
+}
+
+void	rot(t_stack *s)
+{
+	t_stack *tmp;
+
+	if (s->top == NULL || s->top == s->bot)
+		return ;
+	tmp = s->top;
+	s->top = s->top->next;
+	s-bot->next = tmp;
+
+	// NOT FINISHED
+}
+
 void	instruction_tests(t_stack *a, t_stack *b)
 {
 	show_stacks_status(a, b);
-	push(a, b);
-	push(a, b);
-	push(a, b);
-	push(a, b);
+	show_stacks(a, b);
+	//swap(a);
 	push(b, a);
+	push(b, a);
+	push(b, a);
+	push(b, a);
+	//push(b, a);
 	show_stacks(a, b);
 	show_stacks_status(a, b);
 }
