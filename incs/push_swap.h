@@ -30,8 +30,10 @@ typedef struct s_stack t_stack;
 typedef struct s_stack_list t_stack_list; // consider renaming
 struct s_stack
 {
+	// this struct only has one variable as of rn, it's almost not worth it at all if the other attributes stay commented
 	t_stack_list	*top;
-	t_stack_list	*bot;
+//	t_stack_list	*bot;
+	int				size; // added this variable in the circle branch AS A COMMENT to remind myself that this is an option
 };
 struct s_stack_list
 {

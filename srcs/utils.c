@@ -14,15 +14,15 @@
 
 int	init_stacks(t_stack *a, t_stack *b, int *tmp, int size)
 {
-	int				i;
 	t_stack_list	**curr;
 	t_stack_list	*prev;
+	int				i;
 
 	zero_init_stack(a);
 	zero_init_stack(b);
-	i = 0;
 	curr = &a->top;
 	prev = NULL;
+	i = 0;
 	while (i < size)
 	{
 		*curr = malloc(sizeof(t_stack_list));
@@ -30,39 +30,42 @@ int	init_stacks(t_stack *a, t_stack *b, int *tmp, int size)
 			return (clear_stack(a), -1); // not tested at all
 		(*curr)->prev = prev;
 		prev = *curr;
-		(*curr)->data = tmp[i];
+		(*curr)->data = tmp[i++];
 		(*curr)->next = NULL;
 		curr = &((*curr)->next);
-		// check 'i' and compare to size to set 'bot' and 'bot_prev'
-		++i;
+		++a->size;
 	}
-	a->bot = prev; // not tested:wa
+	a->top->prev = prev; // this for circle
+	prev->next = a->top;
 	return (0);
 }
 
 void	zero_init_stack(t_stack *stack)
 {
 	stack->top = NULL;
-	stack->bot = NULL;
+//	stack->bot = NULL;
+	stack->size = 0;
 }
 
 // Clears the contents of a stack but doesn't need to free the stack variable
 // itself  as in our situation it's not allocated
-void	clear_stack(t_stack *stack)
+void	clear_stack(t_stack *s)
 {
+	// NEEDS TO BE MODIFIED FOR CIRCLE STACK
 	t_stack_list	*curr;
 	t_stack_list	*tmp;
+	int				i;
 
-	curr = stack->top;
-	while (curr != NULL)
+	curr = s->top;
+	i = 0;
+	while (i++ < s->size) // or == to top i think not sure that would always work
 	{
 		tmp = curr;
 		curr = curr->next;
 		free(tmp);
 	}
-	// rest
-	stack->top = NULL;
-	stack->bot = NULL;
+	s->top = NULL;
+	s->size = 0;
 }
 
 //void	terminate_ps(t_stack *a, t_stack *b, int **tmp)

@@ -16,11 +16,15 @@ void	show_stacks_status(t_stack *a, t_stack *b)
 {
 	ft_printf("### a status ###\n");
 	ft_printf("top addr: %p\n", a->top);
-	ft_printf("bot addr: %p\n", a->bot);
+//	ft_printf("top prev addr %p\n", a->top->prev);
+//	ft_printf("top prev data %d\n", a->top->prev->data);
+//	ft_printf("bot addr: %p\n", a->bot);
+	ft_printf("size: %d\n", a->size);
 	ft_printf("################\n");
 	ft_printf("### b status ###\n");
 	ft_printf("top addr: %p\n", b->top);
-	ft_printf("bot addr: %p\n", b->bot);
+//	ft_printf("bot addr: %p\n", b->bot);
+	ft_printf("size: %d\n", b->size);
 	ft_printf("################\n");
 }
 void	show_stacks(t_stack *a, t_stack *b)
@@ -34,19 +38,19 @@ void	show_stacks(t_stack *a, t_stack *b)
 	i = 0;
 	curra = a->top;
 	currb = b->top;
-	while (curra || currb)
+	while (i < a->size || i < b->size)
 	{
-		if (curra != NULL)
+		if (i < a->size)
 			ft_printf("%-11d ", curra->data);
 		else
 			ft_printf("%11s ", "");
-		if (currb != NULL)
+		if (i < b->size)
 			ft_printf("%-11d\n", currb->data);
 		else
 			ft_printf("%11s\n", "");
-		if (curra)
+		if (i < a->size)
 			curra = curra->next;
-		if (currb)
+		if (i < b->size)
 			currb = currb->next;
 		++i;
 	}
@@ -69,29 +73,41 @@ void	show_stacks(t_stack *a, t_stack *b)
 
 void	push(t_stack *dst, t_stack *src)
 {
-	// DIDN'T CHECK FOR PREV POINTER
-	// Dont forget to change top and bot pointers approprietly when size is
-	// is small, like 0, 1 or 2
 	t_stack_list *pushing;
 
-	if (src->top == NULL) // useless but keep for debugging with a print
-		return (void)(ft_printf("ya plus rien a push\n"));
+	if (src->size == 0) // useless but keep for debugging with a print
+		return ((void)ft_printf("nothing to push\n"));
 	pushing = src->top;
-	src->top = src->top->next;
-	if (src->top == NULL)
-		src->bot = NULL;
-	pushing->next = dst->top;
-	dst->top = pushing;
-	if (dst->top->next == NULL)
-		dst->bot = dst->top;
+	if (src->size-- == 1)
+		src->top = NULL;
+	else
+	{
+		src->top->prev->next = src->top->next;
+		src->top->next->prev = src->top->prev;
+		src->top = src->top->next;
+	}
+	if (dst->size++ == 0)
+	{
+		dst->top = pushing;
+		dst->top->next = pushing;
+		dst->top->prev = pushing;
+	}
+	else
+	{
+		pushing->next = dst->top;
+		pushing->prev = dst->top->prev;
+		dst->top->prev->next = pushing;
+		dst->top->prev = pushing;
+		dst->top = pushing;
+	}
 }
 
 void	swap(t_stack *s)
 {
 	int	tmp;
 
-	if (s->top == NULL || s->top->next == NULL) // put for debug only, but this might be useful
-		return ;
+	if (s->size < 2) // put for debug only, but this might be useful
+		return ((void)ft_printf("nothing to swap\n"));
 	tmp = s->top->data;
 	s->top->data = s->top->next->data;
 	s->top->next->data = tmp;
@@ -99,15 +115,16 @@ void	swap(t_stack *s)
 
 void	rot(t_stack *s)
 {
-	t_stack *tmp;
-
-	if (s->top == NULL || s->top == s->bot)
-		return ;
-	tmp = s->top;
+	if (s->size < 2)
+		return ((void)ft_printf("nothing to rot\n"));
 	s->top = s->top->next;
-	s-bot->next = tmp;
+}
 
-	// NOT FINISHED
+void	rrot(t_stack *s)
+{
+	if (s->size < 2)
+		return ((void)ft_printf("nothing to rrot\n"));
+	s->top = s->top->prev;
 }
 
 void	instruction_tests(t_stack *a, t_stack *b)
@@ -120,6 +137,14 @@ void	instruction_tests(t_stack *a, t_stack *b)
 	push(b, a);
 	push(b, a);
 	//push(b, a);
+	rot(a);
+	rot(a);
+	rot(b);
+	//rot(a);
+	//rot(a);
+	rrot(a);
+	//rrot(a);
+	swap(a);
 	show_stacks(a, b);
 	show_stacks_status(a, b);
 }

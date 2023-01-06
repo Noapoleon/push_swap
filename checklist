@@ -1,5 +1,6 @@
 INTERROGATIONS:
 	- what if the list is one element long ?
+	- would padding the struct make the program faster ?
 
 TESTS:
 	- int/long max/min
