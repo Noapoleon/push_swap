@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 23:12:28 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/06 13:36:14 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/08 13:34:53 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,72 @@ void	instruction_tests(t_stack *a, t_stack *b)
 	show_stacks_status(a, b);
 	show_stacks(a, b);
 	push(b, a);
-	push(b, a);
-	push(b, a);
-	rot_both(a, b);
-	rot_both(a, b);
-	rot_both(a, b);
-	rot_both(a, b);
-	rot_both(a, b);
-	rot_both(a, b);
-	rot_both(a, b);
-	rrot_both(a, b);
+	//push(b, a);
+	//push(b, a);
+	//rot_both(a, b);
+	//rot_both(a, b);
+	//rot_both(a, b);
+	//rot_both(a, b);
+	//rot_both(a, b);
+	//rot_both(a, b);
+	//rot_both(a, b);
+	//rrot_both(a, b);
 	show_stacks(a, b);
 	show_stacks_status(a, b);
+}
+
+int	is_sorted(t_stack *s)
+{
+	t_stack_list *curr;
+
+	if (s->top == NULL || s->size == 0)
+		return (ft_printf("this bitch empty! YEEEET!!!\n"), 0);
+	curr = s->top;
+	while (curr != s->top->prev) // should still work even with a list of size 1 because it is automatically sorted
+	{
+		if (curr->data > curr->next->data)
+			return (0);
+		curr = curr->next;
+	}
+	return (1);
+}
+
+void	sort_three(t_stack *s)
+{
+	if (s->top->data > s->top->next->data)
+	{
+		if (s->top->data < s->top->prev->data)
+			return (swap(s));
+		rot(s);
+		if (s->top->data > s->top->next->data)
+			swap(s);
+		return ;
+	}
+	else if (s->top->data > s->top->prev->data)
+		return (rrot(s));
+	rrot(s);
+	swap(s);
+	ft_printf("you got there?\n");
+}
+
+void	sort_stacks(t_stack *a, t_stack *b)
+{
+	(void)a;
+	(void)b;
+
+	if (is_sorted(a))
+		return ((void)ft_printf("Stack is sorted!\n"));
+	else
+		ft_printf("Stack is NOT sorted...\n");
+
+	if (a->size == 3)
+	{
+		ft_printf("Trying to sort 3 elements...\n");
+		sort_three(a);
+	}
+
+	if (is_sorted(a))
+		ft_printf("Stack is sorted!\n");
+	else
+		ft_printf("Stack is NOT sorted...\n");
 }

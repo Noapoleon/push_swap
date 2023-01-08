@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:57:11 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/06 13:34:51 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/07 13:14:44 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,7 @@ void	rrot_both(t_stack *a, t_stack *b);
 void	show_stacks_status(t_stack *a, t_stack *b);
 void	show_stacks(t_stack *a, t_stack *b);
 void	instruction_tests(t_stack *a, t_stack *b);
+int		is_sorted(t_stack *s);
+void	sort_stacks(t_stack *a, t_stack *b);
 
 #endif

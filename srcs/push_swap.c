@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:55:18 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/06 13:33:54 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/07 13:13:05 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ int	main(int ac, char **av)
 	// check if tmp already sorted before allocating whole stack (optional but would be better) // actually it's probably better to just allocate for simplicity's sake
 	if (init_stacks(&a, &b, tmp, ac - 1) == -1)
 		return (ft_dprintf(2, "Error\n"), free(tmp), 0);
-	//sort_stacks(&a, &b);
-	instruction_tests(&a, &b);
-	//show_stacks(&a, &b);
+	show_stacks(&a, &b); // remove later
+	sort_stacks(&a, &b);
+	show_stacks(&a, &b); // remove later
+	//instruction_tests(&a, &b);
 	clear_stack(&a);
 	clear_stack(&b);
 	free(tmp);
