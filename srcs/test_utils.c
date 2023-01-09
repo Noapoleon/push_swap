@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 23:12:28 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/09 13:10:39 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/09 16:04:36 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,22 +121,34 @@ void	sort_big_stupid(t_stack *a, t_stack *b)
 	t_stack_list	*min;
 	int				min_i;
 	t_stack_list	*curr;
+	void			(*rotfun)(t_stack *s);
 
-	i = 0;
-	min = a->top;
-	min_i = 0;
-	curr = min->next;
-	while (i < a->size) // what if last one is pushed? will i go out of bounds and try to access the first one??
+	while (a->size != 1)
 	{
-		if (curr->data < min->data)
+		i = 0;
+		min = a->top;
+		min_i = 0;
+		curr = min->next;
+		while (i < a->size) // what if last one is pushed? will i go out of bounds and try to access the first one??
 		{
-			min = curr;
-			min_i = i;
+			if (curr->data < min->data)
+			{
+				min = curr;
+				min_i = i;
+			}
+			curr = curr->next;
+			++i;
 		}
-		curr = curr->next;
-		++i;
+		if (min_i * 2 <= a->size)
+			rotfun = &rrot;
+		else
+			rotfun = &rot;
+		while (a->top != min)
+			rotfun(a);
+		push(b, a);
 	}
-
+	while (b->size != 0)
+		push(a, b);
 	ft_printf("minimum -> %d\n", min->data);
 }
 
