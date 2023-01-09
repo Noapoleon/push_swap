@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:57:11 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/07 13:14:44 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/09 17:16:38 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_stack		t_stack;
 typedef struct s_stack_list	t_stack_list; // consider renaming
 struct s_stack
 {
+	char			name;
 	t_stack_list	*top;
 	int				size; // added this variable in the circle branch AS A COMMENT to remind myself that this is an option
 };
@@ -39,13 +40,16 @@ struct s_stack_list
 	t_stack_list	*next;
 };
 
+// PUSH SWAP
+void	sort_stacks(t_stack *a, t_stack *b);
+
 // PARSER
 int		parse_ints(int **tmp, int ac, char **av);
 int		parse_int(int *n, char *nptr);
 
 // UTILS
 int		init_stacks(t_stack *a, t_stack *b, int *tmp, int size);
-void	zero_init_stack(t_stack *stack);
+void	init_stack(t_stack *stack, char name);
 void	clear_stack(t_stack *stack);
 
 // OPERATIONS
@@ -58,11 +62,14 @@ void	swap_both(t_stack *a, t_stack *b);
 void	rot_both(t_stack *a, t_stack *b);
 void	rrot_both(t_stack *a, t_stack *b);
 
+// SORTS
+void	sort_three(t_stack *s);
+void	sort_big_stupid(t_stack *a, t_stack *b);
+
 // TEST UTILS // REMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOVE LATER
 void	show_stacks_status(t_stack *a, t_stack *b);
 void	show_stacks(t_stack *a, t_stack *b);
 void	instruction_tests(t_stack *a, t_stack *b);
 int		is_sorted(t_stack *s);
-void	sort_stacks(t_stack *a, t_stack *b);
 
 #endif

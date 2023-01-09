@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 23:12:28 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/09 16:04:36 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/09 17:16:13 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,86 +92,4 @@ int	is_sorted(t_stack *s)
 		curr = curr->next;
 	}
 	return (1);
-}
-
-void	sort_three(t_stack *s)
-{
-	if (s->top->data > s->top->next->data)
-	{
-		if (s->top->data < s->top->prev->data)
-			return (swap(s));
-		rot(s);
-		if (s->top->data > s->top->next->data)
-			swap(s);
-		return ;
-	}
-	else if (s->top->data > s->top->prev->data)
-		return (rrot(s));
-	rrot(s);
-	swap(s);
-	ft_printf("you got there?\n");
-}
-
-void	sort_big_stupid(t_stack *a, t_stack *b)
-{
-	(void)b;
-	// BIG STUPID WILL DO TOO MANY INSTRUCTIONS FOR LISTS OF 1 OR 2
-
-	int				i;
-	t_stack_list	*min;
-	int				min_i;
-	t_stack_list	*curr;
-	void			(*rotfun)(t_stack *s);
-
-	while (a->size != 1)
-	{
-		i = 0;
-		min = a->top;
-		min_i = 0;
-		curr = min->next;
-		while (i < a->size) // what if last one is pushed? will i go out of bounds and try to access the first one??
-		{
-			if (curr->data < min->data)
-			{
-				min = curr;
-				min_i = i;
-			}
-			curr = curr->next;
-			++i;
-		}
-		if (min_i * 2 <= a->size)
-			rotfun = &rrot;
-		else
-			rotfun = &rot;
-		while (a->top != min)
-			rotfun(a);
-		push(b, a);
-	}
-	while (b->size != 0)
-		push(a, b);
-	ft_printf("minimum -> %d\n", min->data);
-}
-
-void	sort_stacks(t_stack *a, t_stack *b)
-{
-	(void)a;
-	(void)b;
-
-	if (is_sorted(a))
-		((void)ft_printf("Stack is sorted!\n"));
-	else
-		ft_printf("Stack is NOT sorted...\n");
-
-	if (a->size == 3)
-	{
-		ft_printf("Trying to sort 3 elements...\n");
-		sort_three(a);
-	}
-	else
-		sort_big_stupid(a, b);
-
-	if (is_sorted(a))
-		ft_printf("Stack is sorted!\n");
-	else
-		ft_printf("Stack is NOT sorted...\n");
 }

@@ -22,6 +22,7 @@ SRCS	:=	push_swap.c \
 			utils.c \
 			operations.c \
 			operations2.c \
+			sorts.c \
 			test_utils.c
 OBJS	:=	$(SRCS:.c=.o)
 SRCS	:=	$(addprefix $(SRCDIR)/, $(SRCS))

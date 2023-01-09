@@ -6,13 +6,11 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:55:18 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/09 12:44:33 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/09 17:18:21 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	count_ops = 0;
 
 // Unimportant function
 int	main(int ac, char **av)
@@ -31,13 +29,31 @@ int	main(int ac, char **av)
 	// check if tmp already sorted before allocating whole stack (optional but would be better) // actually it's probably better to just allocate for simplicity's sake
 	if (init_stacks(&a, &b, tmp, ac - 1) == -1)
 		return (ft_dprintf(2, "Error\n"), free(tmp), 0);
-	show_stacks(&a, &b); // remove later
+	//show_stacks(&a, &b); // remove later
 	sort_stacks(&a, &b);
-	show_stacks(&a, &b); // remove later
+	//show_stacks(&a, &b); // remove later
 	//instruction_tests(&a, &b);
 	clear_stack(&a);
 	clear_stack(&b);
 	free(tmp);
-	ft_printf("Number of push_swap instructions executed -> %d\n", count_ops);
 	return (0);
+}
+
+void	sort_stacks(t_stack *a, t_stack *b)
+{
+	(void)a;
+	(void)b;
+
+	if (a->size == 2 && a->top->data > a->top->next->data)
+		swap(a);
+	else if (a->size == 3)
+		sort_three(a);
+	else if (a->size > 3)
+		sort_big_stupid(a, b);
+
+	//if (is_sorted(a))
+	//	ft_printf("Stack is sorted!\n");
+	//else
+	//	ft_printf("Stack is NOT sorted...\n");
+	//show_stacks_status(a, b);
 }

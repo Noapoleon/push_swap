@@ -6,7 +6,7 @@
 /*   By: nlegrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 09:10:06 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/02 10:04:32 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/09 16:33:33 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	parse_ints(int	**tmp, int ac, char **av)
 			return (-1);
 		c = 0;
 		while (c < i)
-			if ((*tmp)[c++] == (*tmp)[i]) // consider dereferencing 'a' in a variable if program is slow
+			if ((*tmp)[c++] == (*tmp)[i])
 				return (-1);
 		++i;
 	}

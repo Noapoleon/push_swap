@@ -6,7 +6,7 @@
 /*   By: nlegrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 10:35:31 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/04 18:40:40 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/09 17:14:21 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	init_stacks(t_stack *a, t_stack *b, int *tmp, int size)
 	t_stack_list	*prev;
 	int				i;
 
-	zero_init_stack(a);
-	zero_init_stack(b);
+	init_stack(a, 'a');
+	init_stack(b, 'b');
 	curr = &a->top;
 	prev = NULL;
 	i = 0;
@@ -42,8 +42,9 @@ int	init_stacks(t_stack *a, t_stack *b, int *tmp, int size)
 }
 
 // Sets stack attributes to 0
-void	zero_init_stack(t_stack *s)
+void	init_stack(t_stack *s, char name)
 {
+	s->name = name;
 	s->top = NULL;
 	s->size = 0;
 }
