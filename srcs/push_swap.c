@@ -6,11 +6,13 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:55:18 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/07 13:13:05 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/09 12:44:33 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	count_ops = 0;
 
 // Unimportant function
 int	main(int ac, char **av)
@@ -36,5 +38,6 @@ int	main(int ac, char **av)
 	clear_stack(&a);
 	clear_stack(&b);
 	free(tmp);
+	ft_printf("Number of push_swap instructions executed -> %d\n", count_ops);
 	return (0);
 }

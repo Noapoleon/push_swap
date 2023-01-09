@@ -6,14 +6,17 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:50:43 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/06 13:58:36 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/09 12:42:49 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+extern int count_ops;
+
 void	push(t_stack *dst, t_stack *src)
 {
+	++count_ops; // REMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOVE GLOBAL LATER
 	t_stack_list	*pushing;
 
 	if (src->size == 0) // useless but keep for debugging with a print
@@ -43,6 +46,7 @@ void	push(t_stack *dst, t_stack *src)
 
 void	swap(t_stack *s)
 {
+	++count_ops; // REMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOVE GLOBAL LATER
 	int	tmp;
 
 	if (s->size < 2) // put for debug only, but this might be useful
@@ -54,6 +58,7 @@ void	swap(t_stack *s)
 
 void	rot(t_stack *s)
 {
+	++count_ops; // REMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOVE GLOBAL LATER
 	if (s->size < 2) // put for debug only, but this might be useful
 		return ((void)ft_printf("nothing to rot\n")); // REMOOOOOOOOOOOOOOOOOOVE PRINT LATER
 	s->top = s->top->next;
@@ -61,6 +66,7 @@ void	rot(t_stack *s)
 
 void	rrot(t_stack *s)
 {
+	++count_ops; // REMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOVE GLOBAL LATER
 	if (s->size < 2) // put for debug only, but this might be useful
 		return ((void)ft_printf("nothing to rrot\n")); // REMOOOOOOOOOOOOOOOOOOVE PRINT LATER
 	s->top = s->top->prev;

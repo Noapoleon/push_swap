@@ -1,6 +1,7 @@
 INTERROGATIONS:
 	- what if the list is one element long ?
 	- would padding the struct make the program faster ?
+	- do double instructions count as one only in the operation count ? e.g.: rr = ra + rb
 
 TESTS:
 	- int/long max/min
