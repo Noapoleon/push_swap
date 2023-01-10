@@ -6,11 +6,44 @@
 /*   By: nlegrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 09:10:06 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/09 16:33:33 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/10 02:16:35 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	get_stack_format(int *n_elem, int ac, char **av)
+{
+	int	i;
+	int	j;
+	//char	*nptr;
+
+	*n_elem = 0;
+	i = 1;
+	while (i < ac)
+	{
+		j = 0;
+		while (av[j] && av[j] == ' ')
+			++j;
+		if (av[j] == '+' || av[j] == '-')
+			++j;
+		while (av[j] >= '0' && av[j] <= '9')
+			++j;
+		if (av
+	}
+	ft_printf("how many numbers? -> %d\n", n_elem);
+}
+
+int	parse_stack(t_stack *a, int ac, char **av)
+{
+	int	*tmp;
+	int	n_elem;
+
+	if (get_stack_format(&n_elem, ac, av) == -1)
+		return (-1);
+	ft_printf("passed the format test lmao!\n"); // remove later
+	return (0);
+}
 
 // Parses all ints from argv and and returns error in case of bad formatting
 int	parse_ints(int	**tmp, int ac, char **av)

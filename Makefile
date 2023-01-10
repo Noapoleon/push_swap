@@ -31,8 +31,7 @@ OBJS	:=	$(addprefix $(OBJDIR)/, $(OBJS))
 all: $(NAME)
 
 test:
-	echo $(SRCS)
-	echo $(OBJS)
+	$(CC) $(DEBUG) $(CWARNS) $(CINCS) unit_test/test.c $(CLIBS) -o test
 
 $(NAME): $(LIBDIR)/libft.a $(OBJS)
 	$(CC) $(DEBUG) $(CWARNS) $(OBJS) $(CLIBS) -o $(NAME)
@@ -68,4 +67,4 @@ re: fclean all
 norm:
 	norminette $(SRCS) $(INCDIR) | awk '{if ($$NF == "OK!") { print "\033[0;92m"$$0"\033[0m" } else if ($$NF == "Error!") { print "\033[0;91m"$$0"\033[0m" } else { print }}'
 
-.PHONY: all bonus resrcs cleansrcs clean fclean re norm
+.PHONY: all bonus resrcs cleansrcs clean fclean re norm test
