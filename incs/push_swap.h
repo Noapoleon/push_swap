@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:57:11 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/11 20:09:25 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/11 21:04:12 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ void	sort_three(t_stack *s);
 void	sort_big_stupid(t_stack *a, t_stack *b);
 
 // TEST UTILS // REMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOVE LATER
-void	show_stacks_status(t_stack *a, t_stack *b);
-void	show_stacks(t_stack *a, t_stack *b);
-void	instruction_tests(t_stack *a, t_stack *b);
-int		is_sorted(t_stack *s);
+//void	show_stacks_status(t_stack *a, t_stack *b);
+//void	show_stacks(t_stack *a, t_stack *b);
+//void	instruction_tests(t_stack *a, t_stack *b);
+//int		is_sorted(t_stack *s);
 
 #endif

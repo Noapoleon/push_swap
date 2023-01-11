@@ -1,5 +1,6 @@
 # Project structure
 NAME	=	push_swap
+CHECKER	=	checker
 INCDIR	=	incs
 LIBDIR	=	libs
 SRCDIR	=	srcs
@@ -23,22 +24,32 @@ SRCS	:=	push_swap.c \
 			utils.c \
 			operations1.c \
 			operations2.c \
-			sorts.c \
-			test_utils.c
+			sorts.c
+SRCS_B	:=	checker_bonus.c \
+			parser1.c \
+			parser2.c \
+			utils.c \
+			operations1.c \
+			operations2.c
 OBJS	:=	$(SRCS:.c=.o)
+OBJS_B	:=	$(SRCS_B:.c=.o)
 SRCS	:=	$(addprefix $(SRCDIR)/, $(SRCS))
 OBJS	:=	$(addprefix $(OBJDIR)/, $(OBJS))
+OBJS_B	:=	$(addprefix $(OBJDIR)/, $(OBJS_B))
 
 all: $(NAME)
 
+bonus: $(LIBDIR)/libft.a $(OBJS_B)
+	$(CC) $(CWARNS) $(OBJS_B) $(CLIBS) -o $(CHECKER)
+
 test:
-	$(CC) $(DEBUG) $(CWARNS) $(CINCS) unit_test/test.c -o test $(CLIBS)
+	$(CC) $(CWARNS) $(CINCS) unit_test/test.c -o test $(CLIBS)
 
 $(NAME): $(LIBDIR)/libft.a $(OBJS)
-	$(CC) $(DEBUG) $(CWARNS) $(OBJS) $(CLIBS) -o $(NAME)
+	$(CC) $(CWARNS) $(OBJS) $(CLIBS) -o $(NAME)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR) $(LIBDIR)
-	$(CC) $(DEBUG) $(CWARNS) $(CINCS) -c $< -o $@
+	$(CC) $(CWARNS) $(CINCS) -c $< -o $@
 
 $(LIBDIR)/libft.a: | $(LIBDIR)
 	make -C $(LIBFT)
@@ -56,12 +67,12 @@ cleansrcs:
 
 clean:
 	make clean -C $(LIBFT)
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(OBJS_B)
 
 fclean: clean
 	$(RM) $(LIBFT)/libft.a
 	$(RM) $(LIBDIR)/libft.a
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(CHECKER)
 
 re: fclean all
 
