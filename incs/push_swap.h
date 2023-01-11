@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:57:11 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/09 17:16:38 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/11 20:09:25 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,17 @@ struct s_stack_list
 // PUSH SWAP
 void	sort_stacks(t_stack *a, t_stack *b);
 
-// PARSER
-int		parse_ints(int **tmp, int ac, char **av);
-int		parse_int(int *n, char *nptr);
+// PARSER 1
+int		setup_stacks(t_stack *a, t_stack *b, int ac, char **av);
+int		get_stack_format(int *n_elem, int ac, char **av);
+int		get_string_format(int *n_elem, char *str);
+int		parse_ints(int	*tmp, int ac, char **av);
+int		parse_int(int *n, char *nptr, int *j);
+// PARSER 2
+int		init_stacks(t_stack *a, t_stack *b, int *tmp, int size);
+void	zero_init_stack(t_stack *s, char name);
 
 // UTILS
-int		init_stacks(t_stack *a, t_stack *b, int *tmp, int size);
-void	init_stack(t_stack *stack, char name);
 void	clear_stack(t_stack *stack);
 
 // OPERATIONS

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations.c                                       :+:      :+:    :+:   */
+/*   operations1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:50:43 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/09 17:19:09 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/11 20:09:25 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	push(t_stack *dst, t_stack *src)
 
 	if (src->size == 0) // useless but keep for debugging with a print
 		return ((void)ft_printf("nothing to push\n")); // REMOOOOOOOOOOOOOOOOOOVE PRINT LATER
-	ft_printf("p%c\n", src->name); // one line too long for function
+	ft_printf("p%c\n", dst->name); // one line too long for function
 	pushing = src->top;
 	if (src->size-- == 1)
 		src->top = NULL;

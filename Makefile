@@ -18,9 +18,10 @@ DEBUG	=	-g3 -gdwarf-4
 
 # Files
 SRCS	:=	push_swap.c \
-			parser.c \
+			parser1.c \
+			parser2.c \
 			utils.c \
-			operations.c \
+			operations1.c \
 			operations2.c \
 			sorts.c \
 			test_utils.c
