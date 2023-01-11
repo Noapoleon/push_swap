@@ -31,7 +31,7 @@ OBJS	:=	$(addprefix $(OBJDIR)/, $(OBJS))
 all: $(NAME)
 
 test:
-	$(CC) $(DEBUG) $(CWARNS) $(CINCS) unit_test/test.c $(CLIBS) -o test
+	$(CC) $(DEBUG) $(CWARNS) $(CINCS) unit_test/test.c -o test $(CLIBS)
 
 $(NAME): $(LIBDIR)/libft.a $(OBJS)
 	$(CC) $(DEBUG) $(CWARNS) $(OBJS) $(CLIBS) -o $(NAME)
