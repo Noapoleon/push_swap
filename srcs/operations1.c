@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:50:43 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/11 20:09:25 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/12 03:43:22 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	push(t_stack *dst, t_stack *src)
 {
 	t_stack_list	*pushing;
 
-	if (src->size == 0) // useless but keep for debugging with a print
-		return ((void)ft_printf("nothing to push\n")); // REMOOOOOOOOOOOOOOOOOOVE PRINT LATER
-	ft_printf("p%c\n", dst->name); // one line too long for function
+	if (src->size == 0)
+		return ;
+	ft_printf("p%c\n", dst->name);
 	pushing = src->top;
-	if (src->size-- == 1)
+	if (--src->size == 0)
 		src->top = NULL;
 	else
 	{
@@ -30,10 +30,9 @@ void	push(t_stack *dst, t_stack *src)
 	}
 	if (dst->size++ == 0)
 	{
-		dst->top = pushing;
-		dst->top->next = pushing;
-		dst->top->prev = pushing;
-		return ;
+		pushing->next = pushing;
+		pushing->prev = pushing;
+		return ((void)(dst->top = pushing));
 	}
 	pushing->next = dst->top;
 	pushing->prev = dst->top->prev;
@@ -46,8 +45,8 @@ void	swap(t_stack *s)
 {
 	int	tmp;
 
-	if (s->size < 2) // put for debug only, but this might be useful
-		return ((void)ft_printf("nothing to swap\n")); // REMOOOOOOOOOOOOOOOOOOVE PRINT LATER
+	if (s->size < 2)
+		return ;
 	ft_printf("s%c\n", s->name);
 	tmp = s->top->data;
 	s->top->data = s->top->next->data;
@@ -56,16 +55,16 @@ void	swap(t_stack *s)
 
 void	rot(t_stack *s)
 {
-	if (s->size < 2) // put for debug only, but this might be useful
-		return ((void)ft_printf("nothing to rot\n")); // REMOOOOOOOOOOOOOOOOOOVE PRINT LATER
+	if (s->size < 2)
+		return ;
 	ft_printf("r%c\n", s->name);
 	s->top = s->top->next;
 }
 
 void	rrot(t_stack *s)
 {
-	if (s->size < 2) // put for debug only, but this might be useful
-		return ((void)ft_printf("nothing to rrot\n")); // REMOOOOOOOOOOOOOOOOOOVE PRINT LATER
+	if (s->size < 2)
+		return ;
 	ft_printf("rr%c\n", s->name);
 	s->top = s->top->prev;
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parser1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlegrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 09:10:06 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/11 18:51:40 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/12 03:47:22 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	setup_stacks(t_stack *a, t_stack *b, int ac, char **av)
 	zero_init_stack(a, 'a');
 	zero_init_stack(b, 'b');
 	if (init_stacks(a, b, tmp, n_elem) == -1)
-	   return (free(tmp), -1);
+		return (free(tmp), -1);
 	free(tmp);
 	return (0);
 }

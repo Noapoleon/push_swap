@@ -6,7 +6,7 @@
 /*   By: nlegrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:36:44 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/09 17:46:14 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/12 03:46:48 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	sort_three(t_stack *s)
 {
-	if (is_sorted(s)) // NOT OPTIMAL because function call
+	if (s->top->data < s->top->next->data
+		&& s->top->next->data < s->top->prev->data)
 		return ;
-	// DOES OPERATIONS EVEN WHEN  STACK IS ORDERED
 	if (s->top->data > s->top->next->data)
 	{
 		if (s->top->data < s->top->prev->data)
@@ -34,8 +34,6 @@ void	sort_three(t_stack *s)
 
 void	sort_big_stupid(t_stack *a, t_stack *b)
 {
-	(void)b;
-
 	int				i;
 	t_stack_list	*min;
 	int				min_i;
@@ -68,5 +66,4 @@ void	sort_big_stupid(t_stack *a, t_stack *b)
 	}
 	while (b->size != 0)
 		push(a, b);
-	//ft_printf("minimum -> %d\n", min->data);
 }

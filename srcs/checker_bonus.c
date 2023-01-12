@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 20:56:01 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/11 22:15:00 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/12 02:01:33 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	main(int ac, char **av)
 		return (ft_dprintf(2, "Error\n"), 0);
 	if (get_operations(&ops) == -1)
 		return (clear_stack(a), ft_dprintf(2, "Error\n"), 0);
+	do_ops(&ops, &a, &b);
 	if (is_sorted(&a))
 		ft_printf("OK\n");
 	else
