@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:55:18 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/12 03:44:33 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/13 00:50:27 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	main(int ac, char **av)
 		return (0);
 	if (setup_stacks(&a, &b, ac, av) == -1)
 		return (ft_dprintf(2, "Error\n"), 0);
+	a.print = 1;
+	b.print = 1;
 	sort_stacks(&a, &b);
 	clear_stack(&a);
 	clear_stack(&b);

@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:45:07 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/12 16:55:36 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/13 00:27:45 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,13 @@ int	get_operations(t_ops **ops, t_stack *a, t_stack *b)
 	t_ops	**curr;
 
 	curr = ops;
-	while (gnl_w(0, &line) == -1)
+	while (gnl_w(0, &line) != -1)
 	{
+		if (*line == '\n' || *line == '\0') // probably wont stop ctrl+d causing error
+		{
+			free(line);
+			break ;
+		}
 		*curr = make_operation(line, a, b);
 		if (*curr == NULL)
 			return (clear_ops(*ops), free(line), -1); // free operations
@@ -39,7 +44,7 @@ t_ops	*make_operation(char *line, t_stack *a, t_stack *b)
 	if (tmp == NULL || len < 3)
 		return (NULL);
 	init_operation(tmp);
-	if (line[len - 3] == 'a') // -1 because len is always one more then the last index, -2 for the \n and -3 for the actual stack name
+	if (line[len - 2] == 'a')
 	{
 		tmp->arg1 = a;
 		tmp->arg2 = b;

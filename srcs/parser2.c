@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 18:49:17 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/11 19:03:00 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/13 00:51:07 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,5 @@ void	zero_init_stack(t_stack *s, char name)
 	s->name = name;
 	s->top = NULL;
 	s->size = 0;
+	s->print = 0;
 }

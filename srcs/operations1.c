@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:50:43 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/12 03:43:22 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/13 00:48:19 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,10 @@ void	push(t_stack *dst, t_stack *src)
 
 	if (src->size == 0)
 		return ;
-	ft_printf("p%c\n", dst->name);
+	if (src->print && dst->print)
+		ft_printf("p%c\n", dst->name);
 	pushing = src->top;
-	if (--src->size == 0)
-		src->top = NULL;
-	else
-	{
-		src->top->prev->next = src->top->next;
-		src->top->next->prev = src->top->prev;
-		src->top = src->top->next;
-	}
+	pop(src);
 	if (dst->size++ == 0)
 	{
 		pushing->next = pushing;
@@ -47,7 +41,8 @@ void	swap(t_stack *s)
 
 	if (s->size < 2)
 		return ;
-	ft_printf("s%c\n", s->name);
+	if (s->print)
+		ft_printf("s%c\n", s->name);
 	tmp = s->top->data;
 	s->top->data = s->top->next->data;
 	s->top->next->data = tmp;
@@ -57,7 +52,8 @@ void	rot(t_stack *s)
 {
 	if (s->size < 2)
 		return ;
-	ft_printf("r%c\n", s->name);
+	if (s->print)
+		ft_printf("r%c\n", s->name);
 	s->top = s->top->next;
 }
 
@@ -65,6 +61,21 @@ void	rrot(t_stack *s)
 {
 	if (s->size < 2)
 		return ;
-	ft_printf("rr%c\n", s->name);
+	if (s->print)
+		ft_printf("rr%c\n", s->name);
 	s->top = s->top->prev;
+}
+
+void	pop(t_stack *s)
+{
+	if (s->size == 0)
+		return ;
+	if (--s->size == 0)
+		s->top = NULL;
+	else
+	{
+		s->top->prev->next = s->top->next;
+		s->top->next->prev = s->top->prev;
+		s->top = s->top->next;
+	}
 }

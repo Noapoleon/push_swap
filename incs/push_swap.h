@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:57:11 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/12 03:45:28 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/13 00:44:22 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <stdlib.h>
 # include <limits.h>
 
+# define PRINT_OP		1
+# define NO_PRINT_OP	0
+
 typedef struct s_stack		t_stack;
 typedef struct s_stack_list	t_stack_list;
 struct s_stack
@@ -25,6 +28,7 @@ struct s_stack
 	char			name;
 	t_stack_list	*top;
 	int				size;
+	int				print;
 };
 struct s_stack_list
 {
@@ -54,6 +58,7 @@ void	push(t_stack *dst, t_stack *src);
 void	swap(t_stack *s);
 void	rot(t_stack *s);
 void	rrot(t_stack *s);
+void	pop(t_stack *s);
 // OPERATIONS 2
 void	swap_both(t_stack *a, t_stack *b);
 void	rot_both(t_stack *a, t_stack *b);
