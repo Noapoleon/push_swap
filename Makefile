@@ -26,6 +26,8 @@ SRCS	:=	push_swap.c \
 			operations2.c \
 			sorts.c
 SRCS_B	:=	checker_bonus.c \
+			checker_utils_bonus.c \
+			get_operations_bonus.c \
 			parser1.c \
 			parser2.c \
 			utils.c \

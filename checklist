@@ -4,25 +4,28 @@ INTERROGATIONS:
 	- do double instructions count as one only in the operation count ? e.g.: rr = ra + rb
 
 TESTS:
-	- int/long max/min
-	- int/long max/min + 1
-	- int/long max/min -1
-	- empty string
-	- multiple negative signs
-	- positive signs
-	- multiple positive signs
-	- letters
+	- [DONE] int/long max/min
+	- [DONE] int/long max/min + 1
+	- [DONE] int/long max/min -1
+	- [DONE] empty string
+	- [DONE] multiple negative signs
+	- [DONE] positive signs
+	- [DONE] multiple positive signs
+	- [DONE] letters
 	-
 
 TO IMPLEMENT:
-	- ps_terminate : terminates push_swap program with exit mode (not sure it's necessary)
+	- [NO] ps_terminate : terminates push_swap program with exit mode (not sure it's necessary)
 
 CONSIDER:
-	- If the size of the list is small enough it might be beneficial to use
+	- [NO] If the size of the list is small enough it might be beneficial to use
 	  normal arrays instead so check if it's worth it to implement it aswell
-	- Right now push and swap functions have checks in them (null checks and
+	- [NO] Right now push and swap functions have checks in them (null checks and
 	  stuff) in case of errors when making the algorithm, my thinking is that
 	  these checks could potentially be avoided once the algorithm is perfect.
 	  Now the question is can I make the sorting algorithm without using BOTH
 	  the size of the array AND the null checks
-	- deference stack 'a' in a variable to make 'parse_ints()' faster?
+	- [NO] deference stack 'a' in a variable to make 'parse_ints()' faster?
+
+
+CHECKER:
