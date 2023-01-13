@@ -27,5 +27,5 @@ CONSIDER:
 	  the size of the array AND the null checks
 	- [NO] deference stack 'a' in a variable to make 'parse_ints()' faster?
 
-
 CHECKER:
+	- haven't checked for leaks

@@ -41,11 +41,10 @@ OBJS_B	:=	$(addprefix $(OBJDIR)/, $(OBJS_B))
 
 all: $(NAME)
 
-bonus: $(LIBDIR)/libft.a $(OBJS_B)
-	$(CC) $(CWARNS) $(OBJS_B) $(CLIBS) -o $(CHECKER)
+bonus: $(CHECKER)
 
-test:
-	$(CC) $(CWARNS) $(CINCS) unit_test/test.c -o test $(CLIBS)
+$(CHECKER): $(LIBDIR)/libft.a $(OBJS_B)
+	$(CC) $(CWARNS) $(OBJS_B) $(CLIBS) -o $(CHECKER)
 
 $(NAME): $(LIBDIR)/libft.a $(OBJS)
 	$(CC) $(CWARNS) $(OBJS) $(CLIBS) -o $(NAME)
@@ -78,7 +77,9 @@ fclean: clean
 
 re: fclean all
 
+rebonus: fclean bonus
+
 norm:
 	norminette $(SRCS) $(INCDIR) | awk '{if ($$NF == "OK!") { print "\033[0;92m"$$0"\033[0m" } else if ($$NF == "Error!") { print "\033[0;91m"$$0"\033[0m" } else { print }}'
 
-.PHONY: all bonus resrcs cleansrcs clean fclean re norm test
+.PHONY: all bonus rebonus resrcs cleansrcs clean fclean re norm test
