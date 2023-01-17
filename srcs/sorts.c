@@ -6,7 +6,7 @@
 /*   By: nlegrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:36:44 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/17 23:44:34 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/18 00:44:24 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,7 @@ void	test_sort_stupid(t_push_swap *ps, t_stack *src, t_stack *dst, int swap, int
 	int	i;
 	int	j;
 	
-	if (left >= right || swap == 0)
+	if (left >= right)
 		return ;
 	median = ps->sorted[left + swap / 2]; // change that // probably not right when treating other branches than the first one so fix that, this is gonna look weird if it doesn't make shit segfault
 	i = 0;
@@ -204,19 +204,26 @@ void	test_sort_stupid(t_push_swap *ps, t_stack *src, t_stack *dst, int swap, int
 		++i;
 	}
 
+	//j = 0;
+	//while (j++ != i)
+	//{
+	//	rrot(dst);
+	//	push(src, dst);
+	//}
+
 	if (swap >= 2)
 	{
-		//(void)j;
+		(void)j;
 		test_sort_stupid(ps, dst, src, swap / 2, left, swap / 2);
 		//rotate something??
-		j = 0;
-		while (j++ != i)
-			rot(dst);
+		//j = 0;
+		//while (j++ != i)
+		//	rrot(src);
 		//test_sort_stupid(ps, dst, src, swap / 2, swap / 2, right);
-		test_sort_stupid(ps, dst, src, swap / 2 + (swap % 2), swap / 2 + 1, right); // there might be a lot of other stuff with +/- 1 to tweak
-		j = 0;
-		while (j++ != i + 1)
-			rot(dst);
+		//test_sort_stupid(ps, dst, src, swap / 2 + (swap % 2), swap / 2 + 1, right); // there might be a lot of other stuff with +/- 1 to tweak
+		//j = 0;
+		//while (j++ != i + 1)
+		//	rot(dst);
 		//test_sort_stupid(ps, dst, src, swap / 2, swap / 2 + 1, right); // there might be a lot of other stuff with +/- 1 to tweak
 		//test_sort_stupid(ps, dst, src, swap / 2 + 1??, swap / 2, right); // might a plus one here for odd numbers
 	}
