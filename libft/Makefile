@@ -29,7 +29,6 @@ SRCS	=	ft_isalpha.c \
 			ft_memcmp.c \
 			ft_strnstr.c \
 			ft_atoi.c \
-			ft_atois.c \
 			ft_calloc.c \
 			ft_strdup.c \
 			ft_substr.c \
@@ -62,7 +61,9 @@ SRCS	=	ft_isalpha.c \
 			ft_printf_handler_utils.c \
 			ft_printf_handler_nums.c \
 			ft_printf_handler_chars.c \
-			ft_printf_field_utils.c 
+			ft_printf_field_utils.c \
+			ft_atois.c \
+			ft_abs.c
 OBJS	=	$(SRCS:.c=.o)
 
 .c.o:

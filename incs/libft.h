@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:48:35 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/10 17:47:35 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/16 23:37:27 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int		ft_atoi(const char *nptr);
-int		ft_atois(int *n, char *nptr);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strdup(const char *s);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
@@ -200,4 +199,10 @@ void	set_compat(t_print *print);
 int		set_field_str(t_print *print, char *field, char *s, int max);
 int		set_field_nums(t_print *print, char *field, char *x, int max);
 void	set_field_bad(t_print *print, char *field, int *len);
+
+// -----------------------//
+//      CUSTOM LIBFT      //
+// -----------------------//
+int		ft_atois(int *n, char *nptr);
+int		ft_abs(int n);
 #endif

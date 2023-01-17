@@ -47,10 +47,10 @@ $(CHECKER): $(LIBDIR)/libft.a $(OBJS_B)
 	$(CC) $(CWARNS) $(OBJS_B) $(CLIBS) -o $(CHECKER)
 
 $(NAME): $(LIBDIR)/libft.a $(OBJS)
-	$(CC) $(CWARNS) $(OBJS) $(CLIBS) -o $(NAME)
+	$(CC) $(DEBUG) $(CWARNS) $(OBJS) $(CLIBS) -o $(NAME)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR) $(LIBDIR)
-	$(CC) $(CWARNS) $(CINCS) -c $< -o $@
+	$(CC) $(DEBUG) $(CWARNS) $(CINCS) -c $< -o $@
 
 $(LIBDIR)/libft.a: | $(LIBDIR)
 	make -C $(LIBFT)

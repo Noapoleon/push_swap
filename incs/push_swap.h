@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:57:11 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/13 00:44:22 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/17 11:08:50 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ void	rrot_both(t_stack *a, t_stack *b);
 // SORTS
 void	sort_three(t_stack *s);
 void	sort_big_stupid(t_stack *a, t_stack *b);
+void	sort_big_less_stupid_still_stupid(t_stack *a, t_stack *b);
 
 #endif
