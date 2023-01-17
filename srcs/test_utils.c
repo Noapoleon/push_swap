@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 23:12:28 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/09 17:16:13 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/17 15:23:34 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	instruction_tests(t_stack *a, t_stack *b)
 	show_stacks_status(a, b);
 }
 
-int	is_sorted(t_stack *s)
+int	is_sorted_stack(t_stack *s)
 {
 	t_stack_list *curr;
 

@@ -1,54 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser2.c                                          :+:      :+:    :+:   */
+/*   quicksort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlegrand <nlegrand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 18:49:17 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/17 21:20:52 by nlegrand         ###   ########.fr       */
+/*   Created: 2023/01/17 14:52:36 by nlegrand          #+#    #+#             */
+/*   Updated: 2023/01/17 19:03:19 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// Fills stacks with parsed int values from argv
-int	init_stacks(t_push_swap *ps, int *arr, int size)
-{
-	t_stack_list	**curr;
-	t_stack_list	*prev;
-	int				i;
-
-	curr = &ps->a.top;
-	prev = NULL;
-	i = 0;
-	while (i < size)
-	{
-		*curr = malloc(sizeof(t_stack_list));
-		if (*curr == NULL)
-			return (clear_stack(&ps->a), -1); // not tested at all
-		(*curr)->prev = prev;
-		prev = *curr;
-		(*curr)->data = arr[i++];
-		(*curr)->next = NULL;
-		curr = &((*curr)->next);
-		++ps->a.size;
-	}
-	ps->a.top->prev = prev;
-	prev->next = ps->a.top;
-	return (0);
-}
-
-// Sets stack attributes to 0
-void	zero_init_stack(t_stack *s, char name)
-{
-	s->name = name;
-	s->top = NULL;
-	s->size = 0;
-	s->print = 0;
-}
-
-// Swap function for quicksort
 static void	qs_swap(int *a, int *b)
 {
 	int	tmp;
@@ -58,8 +21,6 @@ static void	qs_swap(int *a, int *b)
 	*b = tmp;
 }
 
-// Sub-function for quicksort
-// Returns index of pivot after having swapped it for it's correct position
 static int	qs_partition(int *arr, int left, int right)
 {
 	int	pivot;
@@ -79,9 +40,6 @@ static int	qs_partition(int *arr, int left, int right)
 	return (i);
 }
 
-// Sorts an array recursively using a pivot
-// Every number before the pivot is inferior and every number after the pivot is
-// superior
 void	quicksort(int *arr, int left, int right)
 {
 	int	pivot;
@@ -91,4 +49,23 @@ void	quicksort(int *arr, int left, int right)
 	pivot = qs_partition(arr, left, right);
 	quicksort(arr, left, pivot - 1);
 	quicksort(arr, pivot + 1, right);
+}
+
+void	alguez(int *arr, int size)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < size)
+	{
+		j = i + 1;
+		while (j < size)
+		{
+			if (arr[i] > arr[j])
+				qs_swap(&arr[i], &arr[j]);
+			++j;
+		}
+		++i;
+	}
 }

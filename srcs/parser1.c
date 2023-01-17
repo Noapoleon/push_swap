@@ -6,7 +6,7 @@
 /*   By: nlegrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 09:10:06 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/12 03:47:22 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/17 21:17:31 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,44 +15,46 @@
 // Parses argv into a stack of integers
 // Stores parsed stack in variable 'a' and initializes both stacks
 // Returns -1 on format error or malloc fail
-int	setup_stacks(t_stack *a, t_stack *b, int ac, char **av)
+int	setup_push_swap(t_push_swap *ps, int ac, char **av)
 {
 	int	*tmp;
-	int	n_elem;
+	int	size;
 
-	if (get_stack_format(&n_elem, ac, av) == -1)
+	if (get_stack_format(&size, ac, av) == -1)
 		return (-1);
-	tmp = malloc(sizeof(int) * n_elem);
+	tmp = malloc(sizeof(int) * size);
 	if (tmp == NULL)
 		return (-1);
 	if (parse_ints(tmp, ac, av) == -1)
 		return (free(tmp), -1);
-	zero_init_stack(a, 'a');
-	zero_init_stack(b, 'b');
-	if (init_stacks(a, b, tmp, n_elem) == -1)
+	zero_init_stack(&ps->a, 'a');
+	zero_init_stack(&ps->b, 'b');
+	if (init_stacks(ps, tmp, size) == -1)
 		return (free(tmp), -1);
-	free(tmp);
+	quicksort(tmp, 0, size - 1);
+	ps->sorted = tmp;
+	ps->size = size;
 	return (0);
 }
 
 // Goes through argv and counts the numbers of the stack as well as detects
 // format errors and returns -1 if one is encountered (doesn't detect duplicate
 // numbers as they are not parsed in this step)
-int	get_stack_format(int *n_elem, int ac, char **av)
+int	get_stack_format(int *size, int ac, char **av)
 {
 	int	i;
 
-	*n_elem = 0;
+	*size = 0;
 	i = 1;
 	while (i < ac)
-		if (get_string_format(n_elem, av[i++]) == -1)
+		if (get_string_format(size, av[i++]) == -1)
 			return (-1);
 	return (0);
 }
 
 // Sub-function of get_stack_format(), operates on a single string from argv
 // Returns -1 when format error is encountered
-int	get_string_format(int *n_elem, char *str)
+int	get_string_format(int *size, char *str)
 {
 	int	i;
 
@@ -71,7 +73,7 @@ int	get_string_format(int *n_elem, char *str)
 			++i;
 		if (str[i] != '\0' && str[i] != ' ')
 			return (-1);
-		++(*n_elem);
+		++(*size);
 		while (str[i] && str[i] == ' ')
 			++i;
 	}
@@ -79,7 +81,7 @@ int	get_string_format(int *n_elem, char *str)
 }
 
 // Parses all ints from argv and and returns error in case of duplicates
-int	parse_ints(int	*tmp, int ac, char **av)
+int	parse_ints(int	*arr, int ac, char **av)
 {
 	int	i;
 	int	j;
@@ -93,11 +95,11 @@ int	parse_ints(int	*tmp, int ac, char **av)
 		j = 0;
 		while (av[i][j])
 		{
-			if (parse_int(&tmp[c], av[i] + j, &j) == -1)
+			if (parse_int(&arr[c], av[i] + j, &j) == -1)
 				return (-1);
 			dc = 0;
 			while (dc < c)
-				if (tmp[dc++] == tmp[c])
+				if (arr[dc++] == arr[c])
 					return (-1);
 			++c;
 		}
