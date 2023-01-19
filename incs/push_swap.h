@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:57:11 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/17 22:19:41 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/19 04:35:27 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,11 @@ void	rrot_both(t_stack *a, t_stack *b);
 void	sort_three(t_stack *s);
 void	sort_big_stupid(t_stack *a, t_stack *b);
 void	sort_big_less_stupid_still_stupid(t_stack *a, t_stack *b);
-void	test_sort_stupid(t_push_swap *ps, t_stack *a, t_stack *b, int swap, int left, int right);
+void	quicksort_a(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left);
+void	quicksort_b(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left);
+//void	quicksort_a(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left, int right);
+//void	quicksort_b(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left, int right);
+//void	test_sort_stupid(t_push_swap *ps, t_stack *a, t_stack *b, int swap, int left, int right);
 
 // TEST // REMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOVE LATER
 void	quicksort(int *arr, int left, int right);
