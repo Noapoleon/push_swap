@@ -6,7 +6,7 @@
 /*   By: nlegrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:36:44 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/19 07:14:11 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/19 08:57:44 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,8 +191,8 @@ void	quicksort_a(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left)
 
 	if (size == 0)
 		return ;
-//	if (size > 1)
-//	{
+	if (size > 2)
+	{
 		median = ps->sorted[left + size / 2 + size % 2 - 1];
 		//ft_printf("median -------> %d\n", median);
 		//ft_printf("median index -> %d\n", left + size / 2 + size % 2 - 1);
@@ -209,22 +209,28 @@ void	quicksort_a(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left)
 				rot(a);
 			++i;
 		}
-		size -= (size - j);
+		size -= j;
 		//ft_printf("a->size alla -> %d\n", a->size);
 		//ft_printf("b->size laal -> %d\n", b->size);
 		//ft_printf("size alla ----> %d\n", size);
 		//ft_printf("j ------------> %d\n", j);
 
 		i = j;
-		if (j != a->size)
-			while (j--) // rotate back the stuff to the top // useless the first time in a or the first time in b, can be checked with size == ps->size or ps->size /2
+		if (i != a->size)
+			while (i--) // rotate back the stuff to the top // useless the first time in a or the first time in b, can be checked with size == ps->size or ps->size /2
 				rrot(a);
 
-		quicksort_a(ps, a, b, size, left + size); // i think size doesn't need to be +1 for odds because of the <= in the first while loop of this function
-		quicksort_b(ps, a, b, i, left);
-//	}
-//	if (size == 1)
-//		return (push(b, a));
+		quicksort_a(ps, a, b, j, left + j); // i think size doesn't need to be +1 for odds because of the <= in the first while loop of this function
+		quicksort_b(ps, a, b, size, left);
+	}
+	else if (size == 1)
+		push(b, a);
+	else if (size == 2 && a->top->data > a->top->next->data)
+	{
+		swap(a);
+		push(b, a);
+		push(b, a);
+	}
 }
 
 void	quicksort_b(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left)
@@ -235,14 +241,14 @@ void	quicksort_b(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left)
 
 	if (size == 0)
 		return ;
-//	if (size > 1)
-//	{
+	if (size > 2)
+	{
 		median = ps->sorted[left + size / 2 + size % 2 - 1]; // didn't check if there's something to modify here
-		//ft_printf("median -------> %d\n", median);
-		//ft_printf("median index -> %d\n", left + size / 2 + size % 2 - 1);
-		//ft_printf("a->size laal -> %d\n", a->size);
-		//ft_printf("b->size laal -> %d\n", b->size);
-		//ft_printf("size laal ----> %d\n", size);
+		ft_printf("median -------> %d\n", median);
+		ft_printf("median index -> %d\n", left + size / 2 + size % 2 - 1);
+		ft_printf("a->size laal -> %d\n", a->size);
+		ft_printf("b->size laal -> %d\n", b->size);
+		ft_printf("size laal ----> %d\n", size);
 		i = 0;
 		j = 0;
 		while (i < size)
@@ -253,24 +259,28 @@ void	quicksort_b(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left)
 				rot(b);
 			++i;
 		}
-		size -= (size - j);
-		//ft_printf("a->size alla -> %d\n", a->size);
-		//ft_printf("b->size laal -> %d\n", b->size);
-		//ft_printf("size alla ----> %d\n", size);
-		//ft_printf("j ------------> %d\n", j);
+		size -= j;
+		ft_printf("a->size alla -> %d\n", a->size);
+		ft_printf("b->size laal -> %d\n", b->size);
+		ft_printf("size alla ----> %d\n", size);
+		ft_printf("j ------------> %d\n", j);
 
 		i = j;
-		if (j != b->size)
-			while (j--) // rotate back the stuff to the top // useless the first time in a or the first time in b, can be checked with size == ps->size or ps->size /2
+		if (i != b->size)
+			while (i--) // rotate back the stuff to the top // useless the first time in a or the first time in b, can be checked with size == ps->size or ps->size /2
 				rrot(b);
 
-		if (size == 1)
-			return (push(a, b));
-		quicksort_b(ps, a, b, size, left); // i think size doesn't need to be +1 for odds because of the <= in the first while loop of this function
-		quicksort_a(ps, a, b, i, left); // didn't give any thought to that
-//	}
-//	if (size == 1)
-//		return (push(a, b));
+		quicksort_b(ps, a, b, j, left); // i think size doesn't need to be +1 for odds because of the <= in the first while loop of this function
+		quicksort_a(ps, a, b, size, left + size); // didn't give any thought to that
+	}
+	else if (size == 1)
+		push(a, b);
+	else if (size == 2 && b->top->data < b->top->next->data)
+	{
+		swap(b);
+		push(a, b);
+		push(a, b);
+	}
 }
 
 
