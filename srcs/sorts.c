@@ -6,7 +6,7 @@
 /*   By: nlegrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:36:44 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/19 05:57:10 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/19 07:14:11 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,39 +191,40 @@ void	quicksort_a(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left)
 
 	if (size == 0)
 		return ;
-	median = ps->sorted[left + size / 2 + size % 2 - 1];
-	//ft_printf("median -------> %d\n", median);
-	//ft_printf("median index -> %d\n", left + size / 2 + size % 2 - 1);
-	//ft_printf("a->size laal -> %d\n", a->size);
-	//ft_printf("b->size laal -> %d\n", b->size);
-	//ft_printf("size laal ----> %d\n", size);
-	i = 0;
-	j = 0;
-	while (i < size)
-	{
-		if (a->top->data <= median)
-			push(b, a);
-		else
-		{
-			rot(a);
-			++j;
-		}
-		++i;
-	}
-	size -= (size - j);
-	//ft_printf("a->size alla -> %d\n", a->size);
-	//ft_printf("b->size laal -> %d\n", b->size);
-	//ft_printf("size alla ----> %d\n", size);
-	//ft_printf("j ------------> %d\n", j);
-
-	if (j != a->size)
-		while (j--) // rotate back the stuff to the top // useless the first time in a or the first time in b, can be checked with size == ps->size or ps->size /2
-			rrot(a);
-
 //	if (size > 1)
+//	{
+		median = ps->sorted[left + size / 2 + size % 2 - 1];
+		//ft_printf("median -------> %d\n", median);
+		//ft_printf("median index -> %d\n", left + size / 2 + size % 2 - 1);
+		//ft_printf("a->size laal -> %d\n", a->size);
+		//ft_printf("b->size laal -> %d\n", b->size);
+		//ft_printf("size laal ----> %d\n", size);
+		i = 0;
+		j = 0;
+		while (i < size)
+		{
+			if (a->top->data <= median)
+				push(b, a);
+			else if (++j)
+				rot(a);
+			++i;
+		}
+		size -= (size - j);
+		//ft_printf("a->size alla -> %d\n", a->size);
+		//ft_printf("b->size laal -> %d\n", b->size);
+		//ft_printf("size alla ----> %d\n", size);
+		//ft_printf("j ------------> %d\n", j);
+
+		i = j;
+		if (j != a->size)
+			while (j--) // rotate back the stuff to the top // useless the first time in a or the first time in b, can be checked with size == ps->size or ps->size /2
+				rrot(a);
+
 		quicksort_a(ps, a, b, size, left + size); // i think size doesn't need to be +1 for odds because of the <= in the first while loop of this function
-		quicksort_b(ps, a, b, 
-//	push_high_median(ps, a, b, size / 2, left + size / 2 + 1); // i think size doesn't need to be +1 for odds because of the <= in the first while loop of this function
+		quicksort_b(ps, a, b, i, left);
+//	}
+//	if (size == 1)
+//		return (push(b, a));
 }
 
 void	quicksort_b(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left)
@@ -234,25 +235,42 @@ void	quicksort_b(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left)
 
 	if (size == 0)
 		return ;
-	median = ps->sorted[left + size / 2];
-	i = 0;
-	j = 0;
-	while (i < size)
-	{
-		if (b->top->data <= median) // shit
-			push(a, b);
-		else
+//	if (size > 1)
+//	{
+		median = ps->sorted[left + size / 2 + size % 2 - 1]; // didn't check if there's something to modify here
+		//ft_printf("median -------> %d\n", median);
+		//ft_printf("median index -> %d\n", left + size / 2 + size % 2 - 1);
+		//ft_printf("a->size laal -> %d\n", a->size);
+		//ft_printf("b->size laal -> %d\n", b->size);
+		//ft_printf("size laal ----> %d\n", size);
+		i = 0;
+		j = 0;
+		while (i < size)
 		{
-			rot(b);
-			++j;
+			if (b->top->data >= median) // just dumbly inverted, didn't check at all
+				push(a, b);
+			else if (++j)
+				rot(b);
+			++i;
 		}
-		++i;
-	}
+		size -= (size - j);
+		//ft_printf("a->size alla -> %d\n", a->size);
+		//ft_printf("b->size laal -> %d\n", b->size);
+		//ft_printf("size alla ----> %d\n", size);
+		//ft_printf("j ------------> %d\n", j);
 
-	while (j-- && size != ps->size) // rotate back the stuff to the top // useless the first time in a or the first time in b, can be checked with size == ps->size or ps->size /2
-		rrot(b);
+		i = j;
+		if (j != b->size)
+			while (j--) // rotate back the stuff to the top // useless the first time in a or the first time in b, can be checked with size == ps->size or ps->size /2
+				rrot(b);
 
-//	push_low_median(ps, a, b, size / 2, left + size / 2 + 1, right); // i think size doesn't need to be +1 for odds because of the <= in the first while loop of this function
+		if (size == 1)
+			return (push(a, b));
+		quicksort_b(ps, a, b, size, left); // i think size doesn't need to be +1 for odds because of the <= in the first while loop of this function
+		quicksort_a(ps, a, b, i, left); // didn't give any thought to that
+//	}
+//	if (size == 1)
+//		return (push(a, b));
 }
 
 
