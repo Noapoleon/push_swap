@@ -6,7 +6,7 @@
 /*   By: nlegrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:36:44 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/19 08:57:44 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/20 05:26:41 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,191 +187,103 @@ void	quicksort_a(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left)
 {
 	int	median;
 	int	i;
-	int	j;
+	int	remain;
 
 	if (size == 0)
 		return ;
 	if (size > 2)
 	{
 		median = ps->sorted[left + size / 2 + size % 2 - 1];
+		//median = ps->sorted[left + size / 2 - 1];
 		//ft_printf("median -------> %d\n", median);
 		//ft_printf("median index -> %d\n", left + size / 2 + size % 2 - 1);
 		//ft_printf("a->size laal -> %d\n", a->size);
 		//ft_printf("b->size laal -> %d\n", b->size);
 		//ft_printf("size laal ----> %d\n", size);
 		i = 0;
-		j = 0;
+		remain = 0;
 		while (i < size)
 		{
 			if (a->top->data <= median)
 				push(b, a);
-			else if (++j)
+			else if (++remain)
 				rot(a);
 			++i;
 		}
-		size -= j;
+		//size -= remain;
 		//ft_printf("a->size alla -> %d\n", a->size);
 		//ft_printf("b->size laal -> %d\n", b->size);
 		//ft_printf("size alla ----> %d\n", size);
 		//ft_printf("j ------------> %d\n", j);
 
-		i = j;
+		i = remain;
 		if (i != a->size)
 			while (i--) // rotate back the stuff to the top // useless the first time in a or the first time in b, can be checked with size == ps->size or ps->size /2
 				rrot(a);
 
-		quicksort_a(ps, a, b, j, left + j); // i think size doesn't need to be +1 for odds because of the <= in the first while loop of this function
-		quicksort_b(ps, a, b, size, left);
+		quicksort_a(ps, a, b, remain, left + (size - remain)); // i think size doesn't need to be +1 for odds because of the <= in the first while loop of this function
+		quicksort_b(ps, a, b, size - remain, left);
 	}
-	else if (size == 1)
-		push(b, a);
-	else if (size == 2 && a->top->data > a->top->next->data)
+	else if (size == 2)
 	{
-		swap(a);
-		push(b, a);
-		push(b, a);
+		if (a->top->data > a->top->next->data)
+			swap(a);
 	}
 }
 
 void	quicksort_b(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left)
 {
-	int	median;
+    int	median;
 	int	i;
-	int	j;
+	int	remain;
 
 	if (size == 0)
 		return ;
 	if (size > 2)
 	{
+		//median = ps->sorted[left + size / 2 + size % 2 - 1]; // didn't check if there's something to modify here
 		median = ps->sorted[left + size / 2 + size % 2 - 1]; // didn't check if there's something to modify here
-		ft_printf("median -------> %d\n", median);
-		ft_printf("median index -> %d\n", left + size / 2 + size % 2 - 1);
-		ft_printf("a->size laal -> %d\n", a->size);
-		ft_printf("b->size laal -> %d\n", b->size);
-		ft_printf("size laal ----> %d\n", size);
+		//ft_printf("median -------> %d\n", median);
+		//ft_printf("median index -> %d\n", left + size / 2 + size % 2 - 1);
+		//ft_printf("a->size laal -> %d\n", a->size);
+		//ft_printf("b->size laal -> %d\n", b->size);
+		//ft_printf("size laal ----> %d\n", size);
 		i = 0;
-		j = 0;
+		remain = 0;
 		while (i < size)
 		{
-			if (b->top->data >= median) // just dumbly inverted, didn't check at all
+			if (b->top->data > median) // just dumbly inverted, didn't check at all
 				push(a, b);
-			else if (++j)
+			else if (++remain)
 				rot(b);
 			++i;
 		}
-		size -= j;
-		ft_printf("a->size alla -> %d\n", a->size);
-		ft_printf("b->size laal -> %d\n", b->size);
-		ft_printf("size alla ----> %d\n", size);
-		ft_printf("j ------------> %d\n", j);
+		//size -= remain;
+		//ft_printf("a->size alla -> %d\n", a->size);
+		//ft_printf("b->size laal -> %d\n", b->size);
+		//ft_printf("size alla ----> %d\n", size);
+		//ft_printf("j ------------> %d\n", j);
 
-		i = j;
+		i = remain;
 		if (i != b->size)
 			while (i--) // rotate back the stuff to the top // useless the first time in a or the first time in b, can be checked with size == ps->size or ps->size /2
 				rrot(b);
 
-		quicksort_b(ps, a, b, j, left); // i think size doesn't need to be +1 for odds because of the <= in the first while loop of this function
-		quicksort_a(ps, a, b, size, left + size); // didn't give any thought to that
+		//quicksort_b(ps, a, b, remain, left); // i think size doesn't need to be +1 for odds because of the <= in the first while loop of this function
+		//quicksort_a(ps, a, b, size, left + remain); // didn't give any thought to that
+
+		// inverted calls
+		quicksort_a(ps, a, b, remain, left + (size - remain)); // i think size doesn't need to be +1 for odds because of the <= in the first while loop of this function
+		quicksort_b(ps, a, b, size - remain, left);
 	}
 	else if (size == 1)
-		push(a, b);
-	else if (size == 2 && b->top->data < b->top->next->data)
+		//;
+		push(a, b); // something there only for b i think, push or sometihng but just for quickswap_b
+	else if (size == 2)
 	{
-		swap(b);
-		push(a, b);
+		if (b->top->data < b->top->next->data)
+			swap(b);
+		push(a, b); // uncomment this for test
 		push(a, b);
 	}
 }
-
-
-//void	test_sort_stupid(t_push_swap *ps, t_stack *src, t_stack *dst, int n_swap, int left, int right)
-//{
-//	int	median;
-//	int	i;
-//	int	j;
-//	
-//	if (n_swap == 0)
-//		return ;
-//	if (n_swap > 2)
-//	{
-//		median = ps->sorted[left + n_swap / 2]; // change that // probably not right when treating other branches than the first one so fix that, this is gonna look weird if it doesn't make shit segfault
-//		i = 0;
-//		j = 0;
-//		while (i < n_swap) // find closed inferior to median instead of doing like alguez
-//		{
-//			if (src->top->data < median)
-//				push(dst, src);
-//			else
-//			{
-////				push(dst, src);
-////				rot(dst);
-//				rot(src);
-//				++j;
-//			}
-//			++i;
-//		}
-//		test_sort_stupid(ps, src, dst, n_swap / 2 + (n_swap % 2), left + n_swap / 2 + (n_swap % 2), right); // something about adding left when left changes, right now it's always 0 though
-//		//test_sort_stupid(ps, src, dst, n_swap / 2 + (n_swap % 2), left + n_swap / 2 + (n_swap % 2), right); // something about adding left when left changes, right now it's always 0 though
-//	}
-//	else if (n_swap == 1 || n_swap == 2)
-//	{
-//		if (n_swap == 1)
-//			rot(src);
-//		else
-//		{
-//			if (src->top->data < src->top->next->data)
-//				swap(src);
-//			rot(src);
-//			rot(src);
-//		}
-//	}
-////	while (j--)
-////	{
-////		rrot(dst);
-////		push(src, dst);
-////	}
-//	//test_sort_stupid(ps, dst, src, swap / 2, left, swap / 2);
-//
-////	if (n_swap > 2)
-////	{
-////		ft_printf("bitch\n");
-//		(void)j;
-////		test_sort_stupid(ps, dst, src, swap / 2, left, swap / 2);
-//		test_sort_stupid(ps, src, dst, n_swap / 2 + (n_swap % 2), left + n_swap / 2 + (n_swap % 2), right); // something about adding left when left changes, right now it's always 0 though
-////		while (j--)
-////		{
-////			rrot(src);
-//////			push(src, dst);
-////		}
-////		test_sort_stupid(ps, dst, src, n_swap / 2, left, left + n_swap / 2); // something about adding left when left changes, right now it's always 0 though
-////		test_sort_stupid(ps, dst, src, swap / 2, left + swap / 2, left + swap); // something about adding left when left changes, right now it's always 0 though
-//		//test_sort_stupid(ps, dst, src, swap / 2, left, swap / 2);
-//		//rotate something??
-//		//j = 0;
-//		//while (j++ != i)
-//		//	rrot(src);
-//		//test_sort_stupid(ps, dst, src, swap / 2, swap / 2, right);
-//		//test_sort_stupid(ps, dst, src, swap / 2 + (swap % 2), swap / 2 + 1, right); // there might be a lot of other stuff with +/- 1 to tweak
-//		//j = 0;
-//		//while (j++ != i + 1)
-//		//	rot(dst);
-//		//test_sort_stupid(ps, dst, src, swap / 2, swap / 2 + 1, right); // there might be a lot of other stuff with +/- 1 to tweak
-//		//test_sort_stupid(ps, dst, src, swap / 2 + 1??, swap / 2, right); // might a plus one here for odd numbers
-////	}
-////	else if (n_swap == 2)
-////	{
-////		ft_printf("coucou\n");
-////		if (src->top->data < src->top->next->data)
-////			swap(src);
-////		rot(src);
-////		rot(src);
-////		push(src, dst);
-////		push(src, dst);
-////	}
-////	else if (n_swap == 1)
-////	{
-//////		ft_printf("caca\n");
-////		push(src, dst);
-////	rot(src);
-////	}
-//}

@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:55:18 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/19 08:26:37 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/20 04:51:23 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	main(int ac, char **av)
 		return (ft_dprintf(2, "Error\n"), 0);
 	//if (setup_stacks(&a, &b, ac, av) == -1)
 	//	return (ft_dprintf(2, "Error\n"), 0);
+	if (is_sorted_array(ps.sorted, ps.size) == 0)
+		return (ft_printf("ARRAY IS NOT SORTED!!!\n"), 0);
 	ps.a.print = 1;
 	ps.b.print = 1;
 	sort_stacks(&ps);
