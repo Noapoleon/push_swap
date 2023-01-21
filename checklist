@@ -16,6 +16,8 @@ TESTS:
 
 TO IMPLEMENT:
 	- [NO] ps_terminate : terminates push_swap program with exit mode (not sure it's necessary)
+	- sometimes a portion is already sorted properly but will be split by the recursive calls
+	  because it doesn't check, so make is_sorted_list for quicksort_a and b, reverse order for b because pushing to a will invert it
 
 CONSIDER:
 	- [NO] If the size of the list is small enough it might be beneficial to use

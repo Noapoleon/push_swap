@@ -6,7 +6,7 @@
 /*   By: nlegrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:36:44 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/20 22:06:39 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/21 21:08:33 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,10 @@ void	quicksort_a(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left)
 		return ;
 	if (size > 2)
 	{
-		median = ps->sorted[left + size / 2 - 1];
+		if (size % 2) // 3??? I'm not sure it CAN end at size == 3 here, do the math again if there's another loop
+			median = ps->sorted[left + size / 2];
+		else
+			median = ps->sorted[left + size / 2 - ((size / 2) % 2) - 1];
 		remain = 0;
 		i = 0;
 		while (i < size)
@@ -204,13 +207,31 @@ void	quicksort_a(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left)
 				rot(a);
 			++i;
 		}
-
-		ft_printf("size -> %d\n", size);
-		ft_printf("remain -> %d\n", remain);
 		i = remain;
 		if (i != a->size)
 			while (i--) // rotate back the stuff to the top // useless the first time in a or the first time in b, can be checked with size == ps->size or ps->size /2
 				rrot(a);
+//		if (left + (size - remain) == left)
+//		{
+//			ft_printf("TRIGGER -> quicksort_a\n");
+//			ft_printf("median -> %d\n", median);
+//			ft_printf("size -> %d\n", size);
+//			ft_printf("remain -> %d\n", remain);
+//			ft_printf("left -> %d\n", size);
+//		}
+		if (size % 2)
+			ft_printf("median index -> %d\n", left + size / 2);
+		else
+			ft_printf("median index -> %d\n", left + size / 2 - ((size / 2) % 2) - 1);
+		if ((size - remain) % 2)
+		{
+			ft_printf("TRIGGER -> quicksort_a\n");
+			ft_printf("median -> %d\n", median);
+			ft_printf("size -> %d\n", size);
+			ft_printf("remain -> %d\n", remain);
+			ft_printf("left -> %d\n", size);
+		}
+		// DONT TOUCH THIS FOR NOW
 		quicksort_a(ps, a, b, remain, left + (size - remain)); // i think size doesn't need to be +1 for odds because of the <= in the first while loop of this function
 		quicksort_b(ps, a, b, size - remain, left);
 	}
@@ -226,9 +247,15 @@ void	quicksort_b(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left)
 
 	if (size == 0) // maybe < 2 // it shouldn't be possible to have a list with an odd number of elements, needs further investigation
 		return ;
-	if (size > 2)
+//	if (size % 2)
+//	{
+//		ft_printf("HUSTON WE GOT A PROBLEM!!!\n");
+//		ft_printf("size -> %d\n", size);
+//		ft_printf("left -> %d\n", left);
+//	}
+	else if (size > 2)
 	{
-		median = ps->sorted[left + size / 2 + ((size / 2) % 2) - 1]; // didn't check if there's something to modify here
+		median = ps->sorted[left + size / 2 + ((size / 2) % 2)]; // didn't check if there's something to modify here
 		remain = 0;
 		i = 0;
 		while (i < size)
@@ -243,13 +270,30 @@ void	quicksort_b(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left)
 		if (remain != b->size)
 			while (i--) // rotate back the stuff to the top // useless the first time in a or the first time in b, can be checked with size == ps->size or ps->size /2
 				rrot(b);
-		quicksort_a(ps, a, b, remain, left + (size - remain)); // i think size doesn't need to be +1 for odds because of the <= in the first while loop of this function
-		quicksort_b(ps, a, b, size - remain, left);
+//		if (left + (size - remain) == left)
+//		{
+//			ft_printf("TRIGGER -> quicksort_b\n");
+//			ft_printf("median -> %d\n", median);
+//			ft_printf("size -> %d\n", size);
+//			ft_printf("remain -> %d\n", remain);
+//			ft_printf("left -> %d\n", size);
+//		}
+		if ((remain) % 2)
+		{
+			ft_printf("TRIGGER -> quicksort_b\n");
+			ft_printf("median -> %d\n", median);
+			ft_printf("size -> %d\n", size);
+			ft_printf("remain -> %d\n", remain);
+			ft_printf("left -> %d\n", size);
+		}
+		// DONT TOUCH THIS FOR NOW
+		quicksort_a(ps, a, b, size - remain, left + remain); // i think size doesn't need to be +1 for odds because of the <= in the first while loop of this function
+		quicksort_b(ps, a, b, remain, left);
 	}
-	else if (size == 1)
-		ft_printf("HUSTON WE GOT A PROBLEM!!!\n");
-		//;
-		//push(a, b); // something there only for b i think, push or sometihng but just for quickswap_b
+//	else if (size == 1)
+//		ft_printf("HUSTON WE GOT A PROBLEM!!!\n");
+//		//;
+//		//push(a, b); // something there only for b i think, push or sometihng but just for quickswap_b
 	else if (size == 2)
 	{
 		if (b->top->data < b->top->next->data)
