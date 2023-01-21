@@ -44,7 +44,7 @@ all: $(NAME)
 bonus: $(CHECKER)
 
 test:
-	$(CC) $(CWARNS) $(CINCS) unit_test/test.c unit_test/quicksort.c srcs/parser2.c srcs/utils.c $(CLIBS) -o test
+	$(CC) $(CWARNS) $(CINCS) unit_test/test.c srcs/parser1.c srcs/parser2.c srcs/utils.c $(CLIBS) -o test
 
 $(CHECKER): $(LIBDIR)/libft.a $(OBJS_B)
 	$(CC) $(CWARNS) $(OBJS_B) $(CLIBS) -o $(CHECKER)

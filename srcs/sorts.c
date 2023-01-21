@@ -6,7 +6,7 @@
 /*   By: nlegrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:36:44 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/21 21:23:06 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/21 21:59:43 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,11 +185,12 @@ void	sort_big_less_stupid_still_stupid(t_stack *a, t_stack *b)
 
 void	quicksort_a(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left)
 {
+
 	int	median;
 	int	remain;
 	int	i;
 
-	if (size < 2)
+	if (size < 2 || is_ascending_portion(a->top, size))
 		return ;
 	if (size > 2)
 	{
@@ -211,27 +212,6 @@ void	quicksort_a(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left)
 		if (i != a->size)
 			while (i--) // rotate back the stuff to the top // useless the first time in a or the first time in b, can be checked with size == ps->size or ps->size /2
 				rrot(a);
-//		if (left + (size - remain) == left)
-//		{
-//			ft_printf("TRIGGER -> quicksort_a\n");
-//			ft_printf("median -> %d\n", median);
-//			ft_printf("size -> %d\n", size);
-//			ft_printf("remain -> %d\n", remain);
-//			ft_printf("left -> %d\n", size);
-//		}
-//		if (size % 2)
-//			ft_printf("median index -> %d\n", left + size / 2);
-//		else
-//			ft_printf("median index -> %d\n", left + size / 2 - ((size / 2) % 2) - 1);
-//		if ((size - remain) % 2)
-//		{
-//			ft_printf("TRIGGER -> quicksort_a\n");
-//			ft_printf("median -> %d\n", median);
-//			ft_printf("size -> %d\n", size);
-//			ft_printf("remain -> %d\n", remain);
-//			ft_printf("left -> %d\n", size);
-//		}
-		// DONT TOUCH THIS FOR NOW
 		quicksort_a(ps, a, b, remain, left + (size - remain));
 		quicksort_b(ps, a, b, size - remain, left);
 	}
@@ -245,14 +225,14 @@ void	quicksort_b(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left)
 	int	remain;
 	int	i;
 
-	if (size == 0) // maybe < 2 // it shouldn't be possible to have a list with an odd number of elements, needs further investigation
+	if (size == 0)
 		return ;
-//	if (size % 2)
-//	{
-//		ft_printf("HUSTON WE GOT A PROBLEM!!!\n");
-//		ft_printf("size -> %d\n", size);
-//		ft_printf("left -> %d\n", left);
-//	}
+	if (is_descending_portion(b->top, size))
+	{
+		i = size;
+		while (i--)
+			push(a, b);
+	}
 	else if (size > 2)
 	{
 		median = ps->sorted[left + size / 2 + ((size / 2) % 2)]; // didn't check if there's something to modify here
@@ -260,7 +240,7 @@ void	quicksort_b(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left)
 		i = 0;
 		while (i < size)
 		{
-			if (b->top->data >= median) // just dumbly inverted, didn't check at all
+			if (b->top->data >= median)
 				push(a, b);
 			else if (++remain)
 				rot(b);
@@ -268,37 +248,44 @@ void	quicksort_b(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left)
 		}
 		i = remain;
 		if (remain != b->size)
-			while (i--) // rotate back the stuff to the top // useless the first time in a or the first time in b, can be checked with size == ps->size or ps->size /2
+			while (i--)
 				rrot(b);
-//		if (left + (size - remain) == left)
-//		{
-//			ft_printf("TRIGGER -> quicksort_b\n");
-//			ft_printf("median -> %d\n", median);
-//			ft_printf("size -> %d\n", size);
-//			ft_printf("remain -> %d\n", remain);
-//			ft_printf("left -> %d\n", size);
-//		}
-//		if ((remain) % 2)
-//		{
-//			ft_printf("TRIGGER -> quicksort_b\n");
-//			ft_printf("median -> %d\n", median);
-//			ft_printf("size -> %d\n", size);
-//			ft_printf("remain -> %d\n", remain);
-//			ft_printf("left -> %d\n", size);
-//		}
-		// DONT TOUCH THIS FOR NOW
 		quicksort_a(ps, a, b, size - remain, left + remain);
 		quicksort_b(ps, a, b, remain, left);
 	}
-//	else if (size == 1)
-//		ft_printf("HUSTON WE GOT A PROBLEM!!!\n");
-//		//;
-//		//push(a, b); // something there only for b i think, push or sometihng but just for quickswap_b
 	else if (size == 2)
 	{
 		if (b->top->data < b->top->next->data)
 			swap(b);
-		push(a, b); // uncomment this for test
+		push(a, b);
 		push(a, b);
 	}
+}
+
+int	is_ascending_portion(t_stack_list *s, int size)
+{
+	t_stack_list *curr;
+
+	curr = s;
+	while (--size)
+	{
+		if (curr->data > curr->next->data)
+			return (0);
+		curr = curr->next;
+	}
+	return (1);
+}
+
+int	is_descending_portion(t_stack_list *s, int size)
+{
+	t_stack_list *curr;
+
+	curr = s;
+	while (--size)
+	{
+		if (curr->data < curr->next->data)
+			return (0);
+		curr = curr->next;
+	}
+	return (1);
 }
