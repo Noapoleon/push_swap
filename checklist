@@ -31,3 +31,6 @@ CONSIDER:
 
 CHECKER:
 	- haven't checked for leaks
+	- haven't checked if list is still the same same
+	- haven't checked if sorting duplicated elements, theorically if it
+	  duplicated elements the order check should find it and send an error
