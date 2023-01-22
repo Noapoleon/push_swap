@@ -6,7 +6,7 @@
 /*   By: nlegrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 09:10:06 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/17 21:17:31 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/22 08:32:53 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	setup_push_swap(t_push_swap *ps, int ac, char **av)
 		return (-1);
 	if (parse_ints(tmp, ac, av) == -1)
 		return (free(tmp), -1);
-	zero_init_stack(&ps->a, 'a');
-	zero_init_stack(&ps->b, 'b');
+	zero_init_stack(ps->a, 'a');
+	zero_init_stack(ps->b, 'b');
 	if (init_stacks(ps, tmp, size) == -1)
 		return (free(tmp), -1);
 	quicksort(tmp, 0, size - 1);

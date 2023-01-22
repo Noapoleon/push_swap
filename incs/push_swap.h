@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:57:11 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/21 21:59:15 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/22 09:15:54 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ struct s_push_swap
 {
 	int		*sorted;
 	int		size;
-	t_stack	a;
-	t_stack	b;
+	t_stack	*a;
+	t_stack	*b;
 };
 
 // PUSH SWAP
@@ -77,15 +77,20 @@ void	rrot_both(t_stack *a, t_stack *b);
 
 // SORTS
 void	sort_three(t_stack *s);
-void	sort_big_stupid(t_stack *a, t_stack *b);
-void	sort_big_less_stupid_still_stupid(t_stack *a, t_stack *b);
-void	quicksort_a(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left);
-void	quicksort_b(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left);
-int		is_ascending_portion(t_stack_list *s, int size);
-int		is_descending_portion(t_stack_list *s, int size);
-//void	quicksort_a(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left, int right);
-//void	quicksort_b(t_push_swap *ps, t_stack *a, t_stack *b, int size, int left, int right);
-//void	test_sort_stupid(t_push_swap *ps, t_stack *a, t_stack *b, int swap, int left, int right);
+void	quicksort_a(t_push_swap *ps, int size, int left);
+void	quicksort_b(t_push_swap *ps, int size, int left);
+
+// SORTS UTILS
+void	push_n(t_stack *dst, t_stack *src, int n);
+void	roll_back_remain(t_stack *s, int remain);
+int		is_sorted_chunk(t_stack *s, int size);
+int		smart_sort_a(t_stack *a, t_stack *b, int size);
+int		smart_sort_b(t_stack *a, t_stack *b, int size);
+// SORT UTILS 2
+void	three_sort_a(t_stack *a);
+void	three_sort_b(t_stack *b);
+void	four_sort_a(t_stack *a, t_stack *b);
+void	four_sort_b(t_stack *a, t_stack *b);
 
 // TEST // REMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOVE LATER
 void	quicksort(int *arr, int left, int right);
