@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:55:18 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/22 08:37:29 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/27 11:05:12 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ void	sort_stacks(t_push_swap *ps)
 	else if (ps->a->size == 3)
 		sort_three(ps->a);
 	else if (ps->a->size > 3)
-		quicksort_a(ps, ps->size, 0);
+		fraction_sort(ps);
+		//quicksort_a(ps, ps->size, 0);
 }

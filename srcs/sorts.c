@@ -6,7 +6,7 @@
 /*   By: nlegrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:36:44 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/22 09:09:09 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/29 09:05:01 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,46 @@ void	quicksort_b(t_push_swap *ps, int size, int left)
 	roll_back_remain(ps->b, remain);
 	quicksort_a(ps, size - remain, left + remain);
 	quicksort_b(ps, remain, left);
+}
+
+	//ft_printf("recursion no. %d\n", n_recur); REMOOOOOOOOOOOOOOOOOOOOOOOOOOOVE LATER
+	//ft_printf("limit -> %d\n", limit);
+	//ft_printf("index -> %d\n\n", (ps->size / PS_FRACTIONS) * n_recur - 1);
+void	split_list_fractions(t_push_swap *ps, int n_recur) // stop as soon as list contains 3 items
+{
+	int	i;
+	int	limit;
+	int	og_size;
+	int	median;
+
+	if (n_recur != PS_FRACTIONS)
+		limit = ps->sorted[(ps->size / PS_FRACTIONS) * n_recur - 1];
+	else // can be just put above the first if to remove one line if necessary
+		limit = ps->sorted[ps->size - 1];
+	median = ps->sorted[((ps->size / PS_FRACTIONS) * n_recur - 1) - (ps->size / PS_FRACTIONS) / 2];
+	og_size = ps->a->size;
+	i = 0;
+	while (i++ < og_size)
+	{
+		if (ps->a->size == 3)
+			return ;
+		if (ps->a->top->data <= limit)
+		{
+			push(ps->b, ps->a);
+			if (ps->b->top->data <= median)
+				rot(ps->b);
+		}
+		else
+			rot(ps->a);
+	}
+	if (n_recur + 1 <= PS_FRACTIONS)
+		split_list_fractions(ps, n_recur + 1);
+}
+
+void	fraction_sort(t_push_swap *ps)
+{
+	split_list_fractions(ps, 1);
+	//sort_closest(ps);
+	while (ps->b->size != 0)
+		sort_closest(ps);
 }

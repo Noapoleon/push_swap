@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:48:35 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/16 23:37:27 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/28 13:06:36 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,4 +205,6 @@ void	set_field_bad(t_print *print, char *field, int *len);
 // -----------------------//
 int		ft_atois(int *n, char *nptr);
 int		ft_abs(int n);
+int		ft_min(int a, int b);
+int		ft_max(int a, int b);
 #endif

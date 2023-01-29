@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:57:11 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/22 09:15:54 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/29 08:48:13 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,16 @@
 # include <stdlib.h>
 # include <limits.h>
 
-# define PRINT_OP		1
-# define NO_PRINT_OP	0
+# define PS_FRACTIONS	3
+# define RA_RB			0
+# define RA_RRB			1
+# define RRA_RRB		2
+# define RRA_RB			3
 
 typedef struct s_push_swap	t_push_swap;
 typedef struct s_stack		t_stack;
 typedef struct s_stack_list	t_stack_list;
+typedef struct s_rotations	t_rotations;
 struct s_stack_list
 {
 	t_stack_list	*prev;
@@ -43,6 +47,14 @@ struct s_push_swap
 	int		size;
 	t_stack	*a;
 	t_stack	*b;
+};
+struct	s_rotations
+{
+	int		count_total;
+	int		count_a;
+	int		count_b;
+	void	(*funptr_a)(t_stack *s);
+	void	(*funptr_b)(t_stack *s);
 };
 
 // PUSH SWAP
@@ -79,6 +91,11 @@ void	rrot_both(t_stack *a, t_stack *b);
 void	sort_three(t_stack *s);
 void	quicksort_a(t_push_swap *ps, int size, int left);
 void	quicksort_b(t_push_swap *ps, int size, int left);
+void	fraction_sort(t_push_swap *ps);
+
+// ROTATIONS
+void	init_rotations(t_rotations *rots);
+void	sort_closest(t_push_swap *ps);
 
 // SORTS UTILS
 void	push_n(t_stack *dst, t_stack *src, int n);

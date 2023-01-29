@@ -28,6 +28,8 @@ CONSIDER:
 	  Now the question is can I make the sorting algorithm without using BOTH
 	  the size of the array AND the null checks
 	- [NO] deference stack 'a' in a variable to make 'parse_ints()' faster?
+	- [NEW SORT] think to properly handle extreme cases when list is small or
+	  PS_FRACTIONS is big
 
 CHECKER:
 	- haven't checked for leaks
