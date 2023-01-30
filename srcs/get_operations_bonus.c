@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:45:07 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/30 07:54:11 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/30 08:13:23 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ int	get_operations(t_ops **ops, t_stack *a, t_stack *b)
 	curr = ops;
 	while (gnl_w(0, &line) != -1)
 	{
-		if (*line == '\n' || *line == '\0') // probably wont stop ctrl+d causing error
+		if (*line == '\n' || *line == '\0')
 		{
 			free(line);
 			break ;
 		}
 		*curr = make_operation(line, a, b);
 		if (*curr == NULL)
-			return (clear_ops(*ops), free(line), -1); // free operations
+			return (clear_ops(*ops), free(line), -1);
 		curr = &(*curr)->next;
 		free(line);
 	}
@@ -50,7 +50,7 @@ t_ops	*make_operation(char *line, t_stack *a, t_stack *b)
 		tmp->arg1 = a;
 		tmp->arg2 = b;
 	}
-	else // not sure this will work for everything but the order shouldn't matter for ss, rr and rrr. need to check for push
+	else
 	{
 		tmp->arg1 = b;
 		tmp->arg2 = a;

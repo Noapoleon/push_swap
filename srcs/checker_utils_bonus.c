@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:46:57 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/30 07:51:48 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/30 08:12:41 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	do_ops(t_ops *ops)
 // Frees all elements of chained list of operations
 void	clear_ops(t_ops *ops)
 {
-	// NOT TESTED AT ALL
 	t_ops	*curr;
 	t_ops	*tmp;
 

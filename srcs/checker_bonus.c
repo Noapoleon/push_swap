@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 20:56:01 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/30 07:58:19 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/30 08:12:11 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int ac, char **av)
 	t_push_swap	ps;
 	t_ops		*ops;
 
-	if (ac < 2) // should i do that?
+	if (ac < 2)
 		return (0);
 	ps.a = &a;
 	ps.b = &b;

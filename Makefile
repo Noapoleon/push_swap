@@ -42,6 +42,7 @@ SRCS_B	:=	checker_bonus.c \
 OBJS	:=	$(SRCS:.c=.o)
 OBJS_B	:=	$(SRCS_B:.c=.o)
 SRCS	:=	$(addprefix $(SRCDIR)/, $(SRCS))
+SRCS_B	:=	$(addprefix $(SRCDIR)/, $(SRCS_B))
 OBJS	:=	$(addprefix $(OBJDIR)/, $(OBJS))
 OBJS_B	:=	$(addprefix $(OBJDIR)/, $(OBJS_B))
 
@@ -90,5 +91,6 @@ rebonus: fclean bonus
 
 norm:
 	norminette $(SRCS) $(INCDIR) | awk '{if ($$NF == "OK!") { print "\033[0;92m"$$0"\033[0m" } else if ($$NF == "Error!") { print "\033[0;91m"$$0"\033[0m" } else { print }}'
+	norminette $(SRCS_B) $(INCDIR) | awk '{if ($$NF == "OK!") { print "\033[0;92m"$$0"\033[0m" } else if ($$NF == "Error!") { print "\033[0;91m"$$0"\033[0m" } else { print }}'
 
 .PHONY: all bonus rebonus resrcs cleansrcs clean fclean re norm test
