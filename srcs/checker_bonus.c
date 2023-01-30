@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 20:56:01 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/30 05:49:50 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/30 07:58:19 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	main(int ac, char **av)
 	if (setup_push_swap(&ps, ac, av) == -1)
 		return (ft_dprintf(2, "Error\n"), 0);
 	if (get_operations(&ops, ps.a, ps.b) == -1)
-		return (clear_stack(ps.a), ft_dprintf(2, "Error\n"), 0);
+		return (clear_stack(ps.a), free(ps.sorted),
+			ft_dprintf(2, "Error\n"), 0);
 	do_ops(ops);
 	if (is_sorted_stack(ps.a))
 		ft_printf("OK\n");

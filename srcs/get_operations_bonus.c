@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:45:07 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/29 10:06:34 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/30 07:54:11 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	get_operations(t_ops **ops, t_stack *a, t_stack *b)
 		curr = &(*curr)->next;
 		free(line);
 	}
+	*curr = NULL;
 	return (0);
 }
 

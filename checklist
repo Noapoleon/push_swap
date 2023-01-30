@@ -16,8 +16,9 @@ TESTS:
 
 TO IMPLEMENT:
 	- [NO] ps_terminate : terminates push_swap program with exit mode (not sure it's necessary)
-	- [DOING] sometimes a portion is already sorted properly but will be split by the recursive calls
+	- [DONE] sometimes a portion is already sorted properly but will be split by the recursive calls
 	  because it doesn't check, so make is_sorted_list for quicksort_a and b, reverse order for b because pushing to a will invert it
+	- check for bad FRACT compared to the list size to avoid segfaults
 
 CONSIDER:
 	- [NO] If the size of the list is small enough it might be beneficial to use
@@ -33,7 +34,8 @@ CONSIDER:
 
 CHECKER:
 	- haven't checked for leaks
-	- haven't checked if list is still the same same
+	- [TO DO!!!] haven't checked if list is still the same numbers
 	- haven't checked if sorting duplicated elements, theorically if it
 	  duplicated elements the order check should find it and send an error
 	- [IMP] CHECKER HAS LEAKS WHEN ENCOUNTERING ERRORS
+	- SEG FAULTS WHEN LIST IS SORTED ALREADY
