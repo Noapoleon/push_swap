@@ -6,7 +6,7 @@
 /*   By: nlegrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 10:35:31 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/17 16:02:05 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/30 06:24:26 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ void	clear_stack(t_stack *s)
 // Checks that the given stack is sorted in ascending order
 int	is_sorted_stack(t_stack *s)
 {
-	t_stack_list *curr;
+	t_stack_list	*curr;
 
 	if (s == NULL || s->top == NULL || s->size == 0)
 		return (0);
 	curr = s->top;
-	while (curr != s->top->prev) // should still work even with a list of size 1 because it is automatically sorted
+	while (curr != s->top->prev)
 	{
 		if (curr->data > curr->next->data)
 			return (0);
@@ -60,4 +60,3 @@ int	is_sorted_array(int *arr, int size)
 			return (0);
 	return (1);
 }
-

@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:55:18 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/27 11:05:12 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/30 06:35:16 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int ac, char **av)
 {
 	t_stack		a;
 	t_stack		b;
-	t_push_swap ps;
+	t_push_swap	ps;
 
 	if (ac < 2)
 		return (0);
@@ -36,11 +36,16 @@ int	main(int ac, char **av)
 
 void	sort_stacks(t_push_swap *ps)
 {
+	if (is_sorted_stack(ps->a))
+		return ;
 	if (ps->a->size == 2 && ps->a->top->data > ps->a->top->next->data)
 		swap(ps->a);
 	else if (ps->a->size == 3)
 		sort_three(ps->a);
-	else if (ps->a->size > 3)
+	else if (ps->a->size == 4 || ps->a->size == 5)
+		sort_four_five(ps);
+	else if (ps->a->size > 5 && ps->a->size < 1500)
 		fraction_sort(ps);
-		//quicksort_a(ps, ps->size, 0);
+	else if (ps->a->size >= 1500)
+		quicksort_a(ps, ps->size, 0);
 }

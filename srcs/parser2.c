@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 18:49:17 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/22 08:38:53 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/30 06:23:38 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	init_stacks(t_push_swap *ps, int *arr, int size)
 	{
 		*curr = malloc(sizeof(t_stack_list));
 		if (*curr == NULL)
-			return (clear_stack(ps->a), -1); // not tested at all
+			return (clear_stack(ps->a), -1);
 		(*curr)->prev = prev;
 		prev = *curr;
 		(*curr)->data = arr[i++];

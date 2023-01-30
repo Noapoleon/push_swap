@@ -24,8 +24,11 @@ SRCS	:=	push_swap.c \
 			utils.c \
 			operations1.c \
 			operations2.c \
-			sorts.c \
-			rotations.c \
+			small_sorts.c \
+			quick_sort.c \
+			fraction_sort1.c \
+			fraction_sort2.c \
+			fraction_sort3.c \
 			sorts_utils1.c \
 			sorts_utils2.c
 SRCS_B	:=	checker_bonus.c \

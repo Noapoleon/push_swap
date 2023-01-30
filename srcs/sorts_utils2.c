@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 08:44:43 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/22 09:27:54 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/30 06:03:01 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,46 +38,4 @@ void	three_sort_b(t_stack *b)
 		if (b->top->data < b->top->next->data)
 			swap(b);
 	}
-}
-
-void	four_sort_a(t_stack *a, t_stack *b)
-{
-	push_n(b, a, 2);
-	if (a->top->data > a->top->next->data && b->top->data < b->top->next->data)
-		swap_both(a, b);
-	else if (a->top->data > a->top->next->data)
-		swap(a);
-	else if (b->top->data < b->top->next->data)
-		swap(b);
-	if (a->top->data > b->top->data)
-		rot(a);
-	if (a->top->data > b->top->data)
-		rot(a);
-	push(a, b);
-	if (a->top->prev->data > b->top->data)
-		rrot(a);
-	if (a->top->prev->data > b->top->data)
-		rrot(a);
-	push(a, b);
-}
-
-void	four_sort_b(t_stack *a, t_stack *b)
-{
-	push_n(a, b, 2);
-	if (a->top->data > a->top->next->data && b->top->data < b->top->next->data)
-		swap_both(a, b);
-	else if (a->top->data > a->top->next->data)
-		swap(a);
-	else if (b->top->data < b->top->next->data)
-		swap(b);
-	if (a->top->data > b->top->data)
-		rot(a);
-	if (a->top->data > b->top->data)
-		rot(a);
-	push(b, a);
-	if (a->top->prev->data > b->top->data)
-		rrot(a);
-	if (a->top->prev->data > b->top->data)
-		rrot(a);
-	push(b, a);
 }

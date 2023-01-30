@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:57:11 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/29 08:48:13 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/30 06:54:14 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include <limits.h>
 
-# define PS_FRACTIONS	3
+# define FRACT			3
 # define RA_RB			0
 # define RA_RRB			1
 # define RRA_RRB		2
@@ -55,6 +55,7 @@ struct	s_rotations
 	int		count_b;
 	void	(*funptr_a)(t_stack *s);
 	void	(*funptr_b)(t_stack *s);
+	int		data;
 };
 
 // PUSH SWAP
@@ -87,30 +88,40 @@ void	swap_both(t_stack *a, t_stack *b);
 void	rot_both(t_stack *a, t_stack *b);
 void	rrot_both(t_stack *a, t_stack *b);
 
-// SORTS
+// SMALL SORTS
 void	sort_three(t_stack *s);
+void	sort_four_five(t_push_swap *ps);
+
+// QUICK SORT
 void	quicksort_a(t_push_swap *ps, int size, int left);
 void	quicksort_b(t_push_swap *ps, int size, int left);
-void	fraction_sort(t_push_swap *ps);
+void	roll_back_remain(t_stack *s, int remain);
+int		is_sorted_chunk(t_stack *s, int size);
 
-// ROTATIONS
-void	init_rotations(t_rotations *rots);
+// FRACTION SORT 1
+void	fraction_sort(t_push_swap *ps);
+void	split_list_fractions(t_push_swap *ps, int og_size, int left, int recu);
+void	filter_fractions(t_push_swap *ps, int og_size, int splits[2]);
+void	rotate_to_min(t_push_swap *ps);
 void	sort_closest(t_push_swap *ps);
+// FRACTION SORT 2
+void	do_least_rots(t_push_swap *ps, t_rotations *rots);
+void	get_least_rots(t_push_swap *ps, t_rotations *rots);
+void	get_rotation(t_push_swap *ps, t_rotations *tmp, int index_b,
+			t_stack_list *curr);
+int		get_index_a(t_push_swap *ps, t_stack_list *elem);
+void	get_min(t_push_swap *ps, t_stack_list **min, int *min_index);
+// FRACTION SORT 3
+void	set_rot(t_rotations *tmp, int count_a, int count_b, int mode);
+void	copy_rotations(t_rotations *rots, t_rotations *tmp);
 
 // SORTS UTILS
 void	push_n(t_stack *dst, t_stack *src, int n);
-void	roll_back_remain(t_stack *s, int remain);
-int		is_sorted_chunk(t_stack *s, int size);
-int		smart_sort_a(t_stack *a, t_stack *b, int size);
-int		smart_sort_b(t_stack *a, t_stack *b, int size);
+void	rot_n(t_stack *s, int n, void (*rotfun)(t_stack *s));
+int		smart_sort_a(t_stack *a, int size);
+int		smart_sort_b(t_stack *b, int size);
 // SORT UTILS 2
 void	three_sort_a(t_stack *a);
 void	three_sort_b(t_stack *b);
-void	four_sort_a(t_stack *a, t_stack *b);
-void	four_sort_b(t_stack *a, t_stack *b);
-
-// TEST // REMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOVE LATER
-void	quicksort(int *arr, int left, int right);
-void	alguez(int *arr, int size);
 
 #endif

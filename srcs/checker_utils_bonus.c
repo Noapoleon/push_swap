@@ -6,29 +6,11 @@
 /*   By: nlegrand <nlegrand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:46:57 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/13 00:27:59 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/30 05:50:25 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
-
-// Checks if stack list is sorted
-int	is_sorted(t_stack *s)
-{
-	t_stack_list *curr;
-
-	if (s->top == NULL || s->size == 0)
-		return (0);
-	curr = s->top;
-	while (curr != s->top->prev)
-	{
-		if (curr->data > curr->next->data)
-			return (0);
-		curr = curr->next;
-	}
-	return (1);
-}
-
 
 // Goes through the operations chained list and executes each operation using 
 // function pointers
