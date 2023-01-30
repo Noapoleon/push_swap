@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 10:04:59 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/30 05:14:03 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/01/30 07:22:41 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	get_least_rots(t_push_swap *ps, t_rotations *rots)
 	while (i < ps->b->size)
 	{
 		get_rotation(ps, &tmp, i, curr);
-		if (tmp.count_total < rots->count_total || i == 0)
+		if (i == 0 || tmp.count_total < rots->count_total)
 			copy_rotations(rots, &tmp);
 		if (rots->count_total == 0)
 			break ;
