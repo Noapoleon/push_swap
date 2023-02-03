@@ -6,7 +6,7 @@
 /*   By: nlegrand <nlegrand@stud.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:57:11 by nlegrand          #+#    #+#             */
-/*   Updated: 2023/01/30 06:54:14 by nlegrand         ###   ########.fr       */
+/*   Updated: 2023/02/03 09:19:32 by nlegrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_push_swap	t_push_swap;
 typedef struct s_stack		t_stack;
 typedef struct s_stack_list	t_stack_list;
 typedef struct s_rotations	t_rotations;
+
 struct s_stack_list
 {
 	t_stack_list	*prev;
