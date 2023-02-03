@@ -9,7 +9,7 @@ LIBFT	=	libft
 
 # Compiler options
 CC		=	cc
-CWARNS	=	-Wall -Wextra -Werror
+CWARNS	=	-Wall -Wextra -Werror -g
 CLIBS	=	-L./$(LIBDIR) -lft
 CINCS	=	-I./$(INCDIR)
 
@@ -50,17 +50,14 @@ all: $(NAME)
 
 bonus: $(CHECKER)
 
-test:
-	$(CC) $(CWARNS) $(CINCS) unit_test/test.c srcs/parser1.c srcs/parser2.c srcs/utils.c $(CLIBS) -o test
-
 $(CHECKER): $(LIBDIR)/libft.a $(OBJS_B)
 	$(CC) $(CWARNS) $(OBJS_B) $(CLIBS) -o $(CHECKER)
 
 $(NAME): $(LIBDIR)/libft.a $(OBJS)
-	$(CC) $(DEBUG) $(CWARNS) $(OBJS) $(CLIBS) -o $(NAME)
+	$(CC) $(CWARNS) $(OBJS) $(CLIBS) -o $(NAME)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR) $(LIBDIR)
-	$(CC) $(DEBUG) $(CWARNS) $(CINCS) -c $< -o $@
+	$(CC) $(CWARNS) $(CINCS) -c $< -o $@
 
 $(LIBDIR)/libft.a: | $(LIBDIR)
 	make -C $(LIBFT)
@@ -89,8 +86,26 @@ re: fclean all
 
 rebonus: fclean bonus
 
-norm:
-	norminette $(SRCS) $(INCDIR) | awk '{if ($$NF == "OK!") { print "\033[0;92m"$$0"\033[0m" } else if ($$NF == "Error!") { print "\033[0;91m"$$0"\033[0m" } else { print }}'
-	norminette $(SRCS_B) $(INCDIR) | awk '{if ($$NF == "OK!") { print "\033[0;92m"$$0"\033[0m" } else if ($$NF == "Error!") { print "\033[0;91m"$$0"\033[0m" } else { print }}'
+malloc_test: $(OBJS)
+	$(CC) $(CFLAGS) -fsanitize=undefined -rdynamic -o $@ ${OBJS} $(CLIBS) -L. -lmallocator
 
-.PHONY: all bonus rebonus resrcs cleansrcs clean fclean re norm test
+#norminette $(SRCS) $(INCDIR) | awk '{if ($$NF == "OK!") { print "\033[0;92m"$$0"\033[0m" } else if ($$NF == "Error!") { print "\033[0;91m"$$0"\033[0m" } else { print }}'
+#norminette $(SRCS_B) $(INCDIR) | awk '{if ($$NF == "OK!") { print "\033[0;92m"$$0"\033[0m" } else if ($$NF == "Error!") { print "\033[0;91m"$$0"\033[0m" } else { print }}'
+#@echo "\n"
+norm:
+	@echo "\033[44;97;1m                 \033[0m"
+	@echo " \033[44;97;1m  LIBFT NORM:  \033[0m"
+	@echo "\033[44;97;1m                 \033[0m"
+	@norminette $(LIBFT) | awk '{if ($$NF == "OK!") { print "\033[0;92m"$$0"\033[0m" } else if ($$NF == "Error!") { print "\033[41;97;5;1m"$$0"\033[0m" } else { print }}'
+	@echo "\n"
+	@echo "\033[44;97;1m                   \033[0m"
+	@echo " \033[44;97;1m  SOURCES NORM:  \033[0m"
+	@echo "\033[44;97;1m                   \033[0m"
+	@norminette $(SRCDIR) | awk '{if ($$NF == "OK!") { print "\033[0;92m"$$0"\033[0m" } else if ($$NF == "Error!") { print "\033[41;97;5;1m"$$0"\033[0m" } else { print }}'
+	@echo "\n"
+	@echo "\033[44;97;1m                    \033[0m"
+	@echo " \033[44;97;1m  INCLUDES NORM:  \033[0m"
+	@echo "\033[44;97;1m                    \033[0m"
+	@norminette $(INCDIR) | awk '{if ($$NF == "OK!") { print "\033[0;92m"$$0"\033[0m" } else if ($$NF == "Error!") { print "\033[41;97;5;1m"$$0"\033[0m" } else { print }}'
+
+.PHONY: all bonus rebonus resrcs cleansrcs clean fclean re norm
